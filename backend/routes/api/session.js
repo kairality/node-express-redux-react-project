@@ -1,16 +1,48 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
+const { check } = require("express-validator");
 
 // db imports
 const { User } = require("../../db/models");
 
 // auth imports
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
+const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+const validateCredential = check('credential')
+  .exists({checkFalsy: true})
+  .notEmpty()
+  .withMessage("Please provide a valid login credential (e-mail or username)");
+
+const validatePassword = check('password')
+  .exists({checkFalsy: true})
+  .withMessage("Please provide a password!");
+
+const validateLogin = [
+    validateCredential,
+    validatePassword,
+    handleValidationErrors,
+];
+
+// Restore session user
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject()
+      });
+    } else return res.json({});
+  }
+);
+
 router.post(
   '/',
+  validateLogin,
   asyncHandler(async (req, res, next) => {
     const { credential, password } = req.body;
 
