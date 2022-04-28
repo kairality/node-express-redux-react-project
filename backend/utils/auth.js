@@ -1,3 +1,9 @@
+const jwt = require("jsonwebtoken");
+const { jwtConfig } = require("../config");
+const { User } = require("../db/models");
+
+const { secret, expiresIn } = jwtConfig;
+
 // sets a jwt cookie and returns it
 const setTokenCookie = (res, user) => {
   // Create the token.
@@ -19,7 +25,6 @@ const setTokenCookie = (res, user) => {
 
   return token;
 };
-
 
 const restoreUser = (req, res, next) => {
   // token parsed from cookies
@@ -57,6 +62,5 @@ const requireAuth = [
     return next(err);
   },
 ];
-
 
 module.exports = { setTokenCookie, restoreUser, requireAuth };
