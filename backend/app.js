@@ -34,7 +34,7 @@ app.use(
 
 // csrf
 app.use(
-    csrf({
+    csurf({
         cookie: {
             secure: isProduction,
             sameSite: isProduction && "Lax",
