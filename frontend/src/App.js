@@ -1,31 +1,36 @@
-import {Route, Switch} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import { useState, useEffect } from 'react';
 import { sessionRestoreUser } from './store/session';
 
 import Navigation from './components/Navigation';
-import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from './components/SignUpFormPage';
+import Welcome from './components/Welcome';
 
 function App() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
 
+
     useEffect(() => {
       dispatch(sessionRestoreUser()).then(() => setIsLoaded(true));
     }, [dispatch]);
+
+    const sessionUser = useSelector((state) => state.session.user);
+
+    console.log(sessionUser);
+
+
 
   return (
     isLoaded && (
       <>
         <Navigation isLoaded={isLoaded} />
-        <h1>Hello from application</h1>
         <Switch>
-          <Route path="/login">
-            <LoginFormPage />
+          <Route path="/welcome">
+            <Welcome user={sessionUser} />
           </Route>
-          <Route path="/signup">
-            <SignupFormPage />
+          <Route path="/" exact>
+            {sessionUser ? <h1>Welcome, {sessionUser.username}</h1> : <Redirect to="/welcome" />}
           </Route>
         </Switch>
       </>

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/session";
 
+import "./ProfileButton.css"
+
 function ProfileButton({ user }) {
 
   const dispatch = useDispatch();
@@ -32,8 +34,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i class="fa-solid fa-address-card"></i>
+      <button id="userMenu" onClick={openMenu}>
+        <i className="fa-solid fa-address-card"></i>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
