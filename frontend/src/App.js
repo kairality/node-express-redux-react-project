@@ -5,6 +5,7 @@ import { sessionRestoreUser } from './store/session';
 
 import Navigation from './components/Navigation';
 import Welcome from './components/Welcome';
+import SongUploader from './components/SongUploader';
 
 function App() {
     const dispatch = useDispatch();
@@ -30,7 +31,9 @@ function App() {
             <Welcome user={sessionUser} />
           </Route>
           <Route path="/" exact>
-            {sessionUser ? <h1>Welcome, {sessionUser.username}</h1> : <Redirect to="/welcome" />}
+            {sessionUser ?  <></>: <Redirect to="/welcome" />}
+            <h1>Welcome, {sessionUser?.username}</h1>
+            <SongUploader />
           </Route>
         </Switch>
       </>

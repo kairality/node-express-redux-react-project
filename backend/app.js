@@ -17,8 +17,10 @@ const app = express();
 
 // log info in dev environment
 app.use(morgan("dev"));
-
 app.use(cookieParser());
+
+// accept form data and json
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // use cors in development

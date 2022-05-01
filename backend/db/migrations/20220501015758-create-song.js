@@ -11,7 +11,7 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: Users },
+        references: { model: "Users" },
         onDelete: "cascade",
       },
       title: {
@@ -24,7 +24,7 @@ module.exports = {
       },
       public: {
         type: Sequelize.BOOLEAN,
-        default: true,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
