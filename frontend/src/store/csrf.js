@@ -13,10 +13,14 @@ export async function csrfFetch(url, options = {}) {
 
   // set appropriate headers when the method isn't get
   if (options.method.toUpperCase() !== "GET") {
-    options.headers["Content-Type"] =
-      options.headers["Content-Type"] || "application/json";
+    // support multipart form data
+    if (options.headers["Content-Type"] === "multipart/form-data") {
+      delete options.headers["Content-Type"];
+    } else {
+      options.headers["Content-Type"] =
+        options.headers["Content-Type"] || "application/json";
+    }
     options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
-    console.log(options);
   }
 
   // regular old boring fetch call
