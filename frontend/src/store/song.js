@@ -3,6 +3,7 @@ import { csrfFetch, ezFetch } from "./csrf";
 
 const ADD_SONG = "song/addSong";
 const REMOVE_SONG = "song/removeSong";
+const LOAD_SONGS = "song/loadSongs";
 
 const addSong = (song) => {
   return {
@@ -18,6 +19,13 @@ const removeSong = (song) => {
   };
 };
 
+const loadSongs = (songs) => {
+  return {
+    type: LOAD_SONGS,
+    payload: songs,
+  };
+};
+
 export const uploadSong = (data) => async (dispatch) => {
   const { userId, title, privPublic, file } = data;
   const formData = new FormData();
@@ -27,7 +35,6 @@ export const uploadSong = (data) => async (dispatch) => {
   if (file) {
     formData.append("file", file);
   }
-
   const response = await csrfFetch(`/api/songs/`, {
     method: "POST",
     headers: {
@@ -37,7 +44,14 @@ export const uploadSong = (data) => async (dispatch) => {
   });
   const songData = await response.json();
   dispatch(addSong(songData));
-  return {...songData}
+  return { ...songData };
+};
+
+export const genSongs = () => async (dispatch) => {
+  const response = await ezFetch("/api/songs");
+  const songs = await response.json();
+  dispatch(loadSongs(songs));
+  return songs;
 };
 
 const songReducer = (state = {}, action) => {
@@ -49,6 +63,12 @@ const songReducer = (state = {}, action) => {
       const copyState = { ...state };
       delete copyState[action.payload.id];
       return copyState;
+    case LOAD_SONGS:
+      const songData = {};
+      for (let song of action.payload) {
+        songData[song.id] = song;
+      }
+      return { ...state, ...songData };
     default:
       return state;
   }

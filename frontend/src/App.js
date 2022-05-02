@@ -2,10 +2,12 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState, useEffect } from 'react';
 import { sessionRestoreUser } from './store/session';
+import { genSongs } from './store/song';
 
 import Navigation from './components/Navigation';
 import Welcome from './components/Welcome';
 import SongUploader from './components/SongUploader';
+import HomeView from './components/HomeView';
 
 function App() {
     const dispatch = useDispatch();
@@ -14,12 +16,10 @@ function App() {
 
     useEffect(() => {
       dispatch(sessionRestoreUser()).then(() => setIsLoaded(true));
+      dispatch(genSongs());
     }, [dispatch]);
 
-    const sessionUser = useSelector((state) => state.session.user);
-
-    console.log(sessionUser);
-
+   const sessionUser = useSelector((state) => state.session.user);
 
 
   return (
@@ -34,6 +34,7 @@ function App() {
             {sessionUser ?  <></>: <Redirect to="/welcome" />}
             <h1>Welcome, {sessionUser?.username}</h1>
             <SongUploader />
+            <HomeView />
           </Route>
         </Switch>
       </>
