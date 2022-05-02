@@ -88,6 +88,23 @@ const singleMulterUpload = (nameOfKey) =>
 const multipleMulterUpload = (nameOfKey) =>
   multer({ storage: storage }).array(nameOfKey);
 
+// ---- deleet file --------
+
+const awsDeleteFiles = (...files) => {
+    const objects = files;
+    const params = {
+        Bucket: NAME_OF_BUCKET,
+        Delete: {
+            Objects: objects,
+        }
+    };
+    return await s3.deleteObjects(deleteParam, function (err, data) {
+      if (err) console.log(err, err.stack);
+      else console.log("delete", data);
+    });
+
+}
+
 module.exports = {
   s3,
   singlePublicFileUpload,

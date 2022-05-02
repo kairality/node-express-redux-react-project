@@ -33,6 +33,21 @@ router.get(
   })
 );
 
+router.patch(
+    ":/id(\\d+)",
+    asyncHandler(async (req, res, next) => {
+        const { id } = req.params;
+        const { title, public, imgSrc } = req.body;
+        const song = await Song.findByPk(id);
+        if (!song) {
+            const err = new Error("Song not found error");
+            next(err);
+        } else {
+            const updateSong = {...song, title, public };
+        }
+    })
+)
+
 router.post(
   "/",
   singleMulterUpload("file"),
