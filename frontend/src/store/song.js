@@ -47,6 +47,13 @@ export const uploadSong = (data) => async (dispatch) => {
   return { ...songData };
 };
 
+export const deleteSong = (song) => async (dispatch) => {
+    const songId = song.id;
+    console.log(songId);
+    const response = await ezFetch(`/api/songs/${songId}`, "DELETE");
+    dispatch(removeSong(song));
+}
+
 export const genSongs = () => async (dispatch) => {
   const response = await ezFetch("/api/songs");
   const songs = await response.json();

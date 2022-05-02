@@ -90,20 +90,26 @@ const multipleMulterUpload = (nameOfKey) =>
 
 // ---- deleet file --------
 
-const awsDeleteFiles = (...files) => {
-    const objects = files;
-    const params = {
-        Bucket: NAME_OF_BUCKET,
-        Delete: {
-            Objects: objects,
-        }
-    };
-    return await s3.deleteObjects(deleteParam, function (err, data) {
-      if (err) console.log(err, err.stack);
-      else console.log("delete", data);
-    });
+const awsDeleteFiles = async (...files) => {
+  const objects = files.map((file) => {
+    return { Key: file };
+  });
+  const params = {
+    Bucket: NAME_OF_BUCKET,
+    Delete: {
+      Objects: objects,
+    },
+  };
+  console.log(params);
+  return await s3.deleteObjects(params, function (err, data) {
+    if (err) console.log(err, err.stack);
+    else console.log("delete", data);
+  });
+};
 
-}
+const deleteSingleFile = async (file) => {
+  return await awsDeleteFiles(file);
+};
 
 module.exports = {
   s3,
@@ -114,4 +120,6 @@ module.exports = {
   retrievePrivateFile,
   singleMulterUpload,
   multipleMulterUpload,
+  awsDeleteFiles,
+  deleteSingleFile,
 };
