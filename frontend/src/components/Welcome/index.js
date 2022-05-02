@@ -6,7 +6,7 @@ function Welcome({user}) {
 
   return (
     <>
-      {user ? <Redirect to="/" /> : <h1>Welcome, please log in or sign up!</h1>}
+      {user ? <Redirect to="/songs" /> : <h1>Welcome, please log in or sign up!</h1>}
     </>
   );
 }

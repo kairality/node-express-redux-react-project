@@ -1,34 +1,39 @@
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { setCurrentSong, removeCurrentSong } from "../../store/currentSong";
-import { deleteSong } from "../../store/song";
+import defaultImg from "../../images/default_album.png";
 
 import "./SingleSong.css"
 
 function SingleSong({ song }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const currentSong = useSelector((state) => state.currentSong);
   const thisIsCurrentSong = song.id === currentSong.id;
   const userOwnsSong = sessionUser.id === song.userId;
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleDelete = (e) => {
-      e.stopPropagation();
-      if (thisIsCurrentSong) {
-          dispatch(removeCurrentSong());
-      }
-      dispatch(deleteSong(song));
-  }
+
+
+  const {title, imgSrc} = song;
+  const songUser = song?.User;
+  const username = songUser?.username;
 
   return (
-    <li className="singleSong"
-      onClick={() => dispatch(setCurrentSong(song))}
+    <li
+      className="singleSong"
+      onClick={() => {
+        dispatch(setCurrentSong(song));
+        history.push(`/songs/${song.id}`);
+      }}
     >
-      <i class="fa-solid fa-circle-play"></i>
-      <h3>{song.title}</h3>
-      <p>CLick to set current song</p>
-      {userOwnsSong && <button onClick={handleDelete}>Delete</button>}
+      <img className="songTileImg" src={song.imgSrc ?? defaultImg} />
+      <div className="songTileDetail">
+        <h3>{title}</h3>
+        <p>{username}</p>
+      </div>
     </li>
   );
 }

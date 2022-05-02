@@ -1,18 +1,18 @@
-.singleSong i {
-  float: left;
-  margin: 0 15px 0 0;
-}
 
-.singleSong p {
-  font: 200 12px/1.5 Georgia, Times New Roman, serif;
-}
 
 .singleSong {
   padding: 10px;
   overflow: auto;
+  display: flex;
+  gap: 1em;
 }
 
 .singleSong:hover {
   background: #eee;
   cursor: pointer;
+}
+
+.singleSong img {
+  height: 100px;
+  width: 100px;
 }

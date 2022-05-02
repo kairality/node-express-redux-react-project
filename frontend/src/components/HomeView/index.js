@@ -1,23 +1,29 @@
-import { Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import SingleSong from "../SingleSong";
 import SwarmPlayer from "../SwarmPlayer";
+import SongDisplay from "../SongDisplay";
 
 function HomeView() {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
   return (
-    <>
-      <SwarmPlayer />
-      <ul>
+    <Switch>
+      <Route path="/songs" exact>
+        <ul>
           {Object.values(songs).map(song => {
               return (
                   <SingleSong song={song} key={song.id} />
               )
           })}
       </ul>
-    </>
+      </Route>
+      <Route path="/songs/:id">
+        <SongDisplay />
+      </Route>
+    </Switch>
+
   );
 }
 

@@ -35,6 +35,7 @@ export const uploadSong = (data) => async (dispatch) => {
   if (file) {
     formData.append("file", file);
   }
+  console.log(formData);
   const response = await csrfFetch(`/api/songs/`, {
     method: "POST",
     headers: {
@@ -57,7 +58,9 @@ export const deleteSong = (song) => async (dispatch) => {
 export const genSongs = () => async (dispatch) => {
   const response = await ezFetch("/api/songs");
   const songs = await response.json();
-  dispatch(loadSongs(songs));
+  if (response.ok) {
+    dispatch(loadSongs(songs));
+  }
   return songs;
 };
 
