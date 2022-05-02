@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
+      imgSrc: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
