@@ -9,7 +9,7 @@ const { Song } = require("../../db/models");
 //auth imports
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
-const { singleMulterUpload, singlePublicFileUpload } = require("../../awsS3");
+const { singleMulterUpload, singlePublicFileUpload, deleteSingleFile } = require("../../awsS3");
 
 router.get(
   "/",
@@ -33,20 +33,40 @@ router.get(
   })
 );
 
-router.patch(
-    ":/id(\\d+)",
+// router.patch(
+//     ":/id(\\d+)",
+//     asyncHandler(async (req, res, next) => {
+//         const { id } = req.params;
+//         const { title, public, imgSrc } = req.body;
+//         const song = await Song.findByPk(id);
+//         if (!song) {
+//             const err = new Error("Song not found error");
+//             next(err);
+//         } else {
+//             const updateSong = {...song, title, public };
+//             await song.update(updateSong);
+//         }
+//     })
+// )
+
+router.delete(
+    "/:id(\\d+)",
     asyncHandler(async (req, res, next) => {
         const { id } = req.params;
-        const { title, public, imgSrc } = req.body;
         const song = await Song.findByPk(id);
         if (!song) {
             const err = new Error("Song not found error");
             next(err);
         } else {
-            const updateSong = {...song, title, public };
+            const key = song.src;
+            await Promise.all([
+              deleteSingleFile(key),
+              song.destroy(),
+            ]);
+            res.status(204).end();
         }
-    })
-)
+    }),
+);
 
 router.post(
   "/",

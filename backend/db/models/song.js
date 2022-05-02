@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       imgSrc: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       public: {
         type: DataTypes.BOOLEAN,
