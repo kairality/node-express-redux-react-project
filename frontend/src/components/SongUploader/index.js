@@ -24,7 +24,6 @@ function SongUploader() {
 
   const handleChange = (file) => {
     setFile(file);
-    console.log(file);
   };
 
   const dispatch = useDispatch();

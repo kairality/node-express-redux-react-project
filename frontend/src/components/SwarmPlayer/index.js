@@ -4,6 +4,8 @@ import { useState, useEffect, useImperativeHandle } from "react";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
+import "./SwarmPlayer.css";
+
 function SwarmPlayer() {
   const currentSong = useSelector((state) => state.currentSong);
 
@@ -15,11 +17,13 @@ function SwarmPlayer() {
   ];
 
   return (
-    <AudioPlayer
-      autoPlay
-      src={currentSong.src}
-      onPlay={(e) => console.log("onPlay")}
-    />
+    <div className="swarmPlayer">
+      <AudioPlayer
+        autoPlay
+        src={currentSong.src}
+        onPlay={(e) => console.log("onPlay")}
+      />
+    </div>
   );
 }
 

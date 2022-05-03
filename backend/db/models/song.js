@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   const Song = sequelize.define(
     "Song",
     {
-      userId: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -25,7 +28,15 @@ module.exports = (sequelize, DataTypes) => {
   );
   Song.associate = function (models) {
     // associations can be defined here
+  const commentMapping = {
+      through: "SongComment",
+      otherKey: "userId",
+      foreignKey: "songId",
+      as: "usersCommented",
+    };
     Song.belongsTo(models.User, { foreignKey: "userId" });
+    Song.hasMany(models.SongComment, {foreignKey: "songId"});
+    Song.belongsToMany(models.User, commentMapping);
   };
   Song.createWrapper = async function (data) {};
   return Song;

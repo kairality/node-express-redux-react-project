@@ -51,8 +51,17 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = function (models) {
+    // is this even allowed????
+    const commentMapping = {
+      through: "SongComment",
+      otherKey: "songId",
+      foreignKey: "userId",
+      as: "songsCommented",
+    };
     // associations can be defined here
-     User.hasMany(models.Song, { foreignKey: "userId" });
+    User.hasMany(models.Song, { foreignKey: "userId" });
+    User.hasMany(models.SongComment, { foreignKey: "userId" });
+    User.belongsToMany(models.Song, commentMapping);
   };
 
   User.prototype.toSafeObject = function () {

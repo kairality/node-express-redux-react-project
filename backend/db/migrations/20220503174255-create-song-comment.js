@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Songs", {
+    return queryInterface.createTable("SongComments", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,21 +14,19 @@ module.exports = {
         references: { model: "Users" },
         onDelete: "cascade",
       },
-      title: {
-        type: Sequelize.STRING(180),
+      songId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: "Songs" },
+        onDelete: "cascade",
       },
-      src: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      public: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true,
-      },
-      imgSrc: {
-        type: Sequelize.STRING,
+      songTimestamp: {
+        type: Sequelize.INTEGER,
         allowNull: true,
+      },
+      body: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Songs');
+    return queryInterface.dropTable('SongComments');
   }
 };
