@@ -1,104 +1,68 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 //db imports
-const { Song, User, Comment } = require("../../db/models");
+const { Song, User, SongComment } = require("../../db/models");
 
 //auth imports
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 
+router.get(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const { songId } = req.params;
+    const song = await Song.findByPk(songId, {
+      include: [{ model: User, as: "usersCommented" }, { model: SongComment }],
+    });
+    const { SongComment: songComments, usersCommented } = song;
+    return res.json({
+      songComments: song.SongComments,
+      usersCommented: song.usersCommented,
+    });
+  })
+);
 
-// router.get(
-//   "/",
-//   asyncHandler(async (req, res, next) => {
-//     const songs = await Song.findAll({
-//       include: [{ model: User, attributes: ["username"] }],
-//     });
-//     return res.json(songs);
-//   })
-// );
+router.post(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const { userId, songId, songTimestamp, body } = req.body;
+    try {
+      const comment = await SongComment.create({
+        userId,
+        songId,
+        body,
+        songTimestamp,
+      });
+      const { id } = comment;
+      console.log(id);
+      const fetchedComment = await Song.findByPk(id, {
+        include: [{ model: User, attributes: ["username"] }],
+      });
+      return res.json({
+        fetchedComment,
+      });
+    } catch (e) {
+      next(e);
+    }
+  })
+);
 
-// router.get(
-//   "/:id(\\d+)",
-//   asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-//     const song = await Song.findByPk(id, {
-//       include: [{ model: User, attributes: ["username"] }],
-//     });
-//     if (!song) {
-//       const err = new Error("Song not found error");
-//       next(err);
-//     } else {
-//       res.json(song);
-//     }
-//   })
-// );
-
-// router.patch(
-//   "/:id(\\d+)",
-//   singleMulterUpload("imgFile"),
-//   asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-//     const { title, public, imgSrc } = req.body;
-//     const song = await Song.findByPk(id);
-//     if (!song) {
-//       const err = new Error("Song not found error");
-//       next(err);
-//     } else {
-//       const update = { ...song, title, public };
-//       try {
-//         if (req.file) {
-//           const imgSrc = await singlePublicFileUpload(req.file);
-//           update.imgSrc = imgSrc;
-//         }
-//         const updatedSong = await song.update(update);
-//         const fetchedSong = await Song.findByPk(id, {
-//           include: [{ model: User, attributes: ["username"] }],
-//         });
-//         return res.json(fetchedSong);
-//       } catch (e) {
-//         next(e);
-//       }
-//     }
-//   })
-// );
-
-// router.delete(
-//   "/:id(\\d+)",
-//   asyncHandler(async (req, res, next) => {
-//     const { id } = req.params;
-//     const song = await Song.findByPk(id);
-//     if (!song) {
-//       const err = new Error("Song not found error");
-//       next(err);
-//     } else {
-//       const key = song.src;
-//       await Promise.all([deleteSingleFile(key), song.destroy()]);
-//       res.status(204).end();
-//     }
-//   })
-// );
-
-// router.post(
-//   "/",
-//   singleMulterUpload("file"),
-//   asyncHandler(async (req, res, next) => {
-//     const { userId, title, public } = req.body;
-//     const src = await singlePublicFileUpload(req.file);
-//     try {
-//       const song = await Song.create({ userId, title, src, public });
-//       const songId = song.id;
-//       const fetchedSong = await Song.findByPk(songId, {
-//         include: [{ model: User, attributes: ["username"] }],
-//       });
-//       return res.json(fetchedSong);
-//     } catch (e) {
-//       next(e);
-//     }
-//   })
-// );
+router.delete(
+  "/:id(\\d+)",
+  asyncHandler(async (req, res, next) => {
+    const { id } = req.params;
+    const comment = await SongComment.findByPk(id);
+    if (!comment) {
+      const err = new Error("Comment not found error");
+      next(err);
+    } else {
+      await comment.destroy();
+      res.status(204).end();
+    }
+  })
+);
 
 module.exports = router;

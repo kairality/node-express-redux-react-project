@@ -14,12 +14,11 @@ function SongDisplay() {
 
     const sessionUser = useSelector((state) => state.session.user);
     const currentSongId = useSelector((state) => state.currentSong.id);
+    console.log(currentSongId);
     const dispatch = useDispatch();
 
   useEffect(() => {
-      console.log("here");
       if (!currentSongId && song) {
-          console.log("here");
           dispatch(setCurrentSong(song));
       }
   }, [currentSongId, song]);
@@ -38,7 +37,7 @@ function SongDisplay() {
 
   return (
     <div className="songDisplay">
-      <img src={imgSrc ?? defaultImg} />
+      <img src={imgSrc ?? defaultImg} onClick={() => dispatch(setCurrentSong(song))}/>
       <div className="songDisplayDetails">
         <h2>{title}</h2>
         <h3>{username}</h3>

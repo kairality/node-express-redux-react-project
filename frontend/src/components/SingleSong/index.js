@@ -6,7 +6,7 @@ import defaultImg from "../../images/default_album.png";
 
 import "./SingleSong.css"
 
-function SingleSong({ song }) {
+function SingleSong({ song, size }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -23,9 +23,9 @@ function SingleSong({ song }) {
 
   return (
     <li
-      className="singleSong"
+      className={`singleSong ${size ?? ''}`}
       onClick={() => {
-        dispatch(setCurrentSong(song));
+        //dispatch(setCurrentSong(song));
         history.push(`/songs/${song.id}`);
       }}
     >

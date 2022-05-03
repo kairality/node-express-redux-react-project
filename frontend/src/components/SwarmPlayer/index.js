@@ -4,6 +4,8 @@ import { useState, useEffect, useImperativeHandle } from "react";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
+import SingleSong from "../SingleSong";
+
 import "./SwarmPlayer.css";
 
 function SwarmPlayer() {
@@ -22,6 +24,7 @@ function SwarmPlayer() {
         autoPlay
         src={currentSong.src}
         onPlay={(e) => console.log("onPlay")}
+        customAdditionalControls={[<SingleSong song={currentSong} size={"small"} />]}
       />
     </div>
   );
