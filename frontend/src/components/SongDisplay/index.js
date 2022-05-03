@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import defaultImg from "../../images/default_album.png";
   import { deleteSong } from "../../store/song";
 import SongDeleteButton from "./SongDeleteButton";
+import SongEditButton from "./SongEditButton";
 
 function SongDisplay() {
   const { id } = useParams();
@@ -22,15 +23,14 @@ function SongDisplay() {
      User: { username },
    } = song;
 
-
-
   return (
-      <div className="songDisplay">
-          <img src={imgSrc ?? defaultImg} />
-          {title}
-          {username}
-          {userOwnsSong && <SongDeleteButton song={song}/>}
-      </div>
+    <div className="songDisplay">
+      <img src={imgSrc ?? defaultImg} />
+      {title}
+      {username}
+      {userOwnsSong && <SongDeleteButton song={song} />}
+      {userOwnsSong && <SongEditButton song={song} />}
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@ import { csrfFetch, ezFetch } from "./csrf";
 const ADD_SONG = "song/addSong";
 const REMOVE_SONG = "song/removeSong";
 const LOAD_SONGS = "song/loadSongs";
+const UPDATE_SONG = "song/updateSong";
 
 const addSong = (song) => {
   return {
@@ -26,6 +27,13 @@ const loadSongs = (songs) => {
   };
 };
 
+const updateSong = (song) => {
+  return {
+    type: UPDATE_SONG,
+    payload: song,
+  }
+}
+
 export const uploadSong = (data) => async (dispatch) => {
   const { userId, title, privPublic, file } = data;
   const formData = new FormData();
@@ -35,7 +43,6 @@ export const uploadSong = (data) => async (dispatch) => {
   if (file) {
     formData.append("file", file);
   }
-  console.log(formData);
   const response = await csrfFetch(`/api/songs/`, {
     method: "POST",
     headers: {
@@ -47,6 +54,27 @@ export const uploadSong = (data) => async (dispatch) => {
   dispatch(addSong(songData));
   return { ...songData };
 };
+
+export const editSong = (song, data) => async (dispatch) => {
+  const { id } = song;
+  const {title, privPublic, imgFile } = data;
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("public", privPublic);
+  if (imgFile) {
+    formData.append("imgFile", imgFile);
+  }
+  const response = await csrfFetch(`/api/songs/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+  const songData = await response.json();
+  dispatch(addSong(songData));
+  return {...songData};
+}
 
 export const deleteSong = (song) => async (dispatch) => {
     const songId = song.id;
