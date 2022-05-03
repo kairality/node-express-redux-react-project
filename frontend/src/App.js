@@ -28,6 +28,9 @@ function App() {
       <>
         <Navigation isLoaded={isLoaded} />
         <Switch>
+          <Route path="/" exact>
+            <Redirect to="/welcome" />
+          </Route>
           <Route path="/welcome">
             <Welcome user={sessionUser} />
           </Route>

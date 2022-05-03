@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { editSong } from "../../../store/song";
+import ImagePicker from "./ImagePicker";
+
+import "./EditSongForm.css";
 
 export default function EditSongForm({song, setShowModal}) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -30,7 +33,7 @@ export default function EditSongForm({song, setShowModal}) {
   };
 
   return (
-    <div>
+    <div className="editSongForm">
       <h1>Edit Song!</h1>
       {errors.length > 0 &&
         errors.map((error) => <div key={error}>{error}</div>)}
@@ -55,6 +58,7 @@ export default function EditSongForm({song, setShowModal}) {
             onChange={() => setPrivPublic((prev) => !prev)}
           />
         </label>
+        <ImagePicker song={song} setImgFile={setImgFile}/>
         <button type="submit">Update Song</button>
       </form>
     </div>

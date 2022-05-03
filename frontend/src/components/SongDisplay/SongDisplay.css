@@ -1,0 +1,11 @@
+.songDisplay {
+    display: flex;
+    background-color: black;
+    position: relative;
+}
+
+.songDisplay img {
+    max-width: 500px;
+    max-height: 500px;
+    object-fit: cover;
+}
