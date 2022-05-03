@@ -20,7 +20,6 @@ if (process.env.NODE_ENV !== "production") {
 
 if (process.env.NODE_ENV !== "production") {
   restoreCSRF();
-
   window.csrfFetch = csrfFetch;
   window.ezFetch = ezFetch;
   window.store = store;

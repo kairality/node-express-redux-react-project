@@ -1,5 +1,7 @@
 import Cookies from "js-cookie";
 
+
+//"..store/csrf.js"
 // easier way to use csrffetch for most of my purposes
 export async function ezFetch(url, method = "GET", body) {
   return await csrfFetch(url, { method, body });

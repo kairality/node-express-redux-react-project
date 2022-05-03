@@ -1,10 +1,11 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 //db imports
 const { Song, User } = require("../../db/models");
+const commentsRouter = require("./comments");
 
 //auth imports
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
@@ -15,15 +16,8 @@ const {
   deleteSingleFile,
 } = require("../../awsS3");
 
-router.get(
-  "/",
-  asyncHandler(async (req, res, next) => {
-    const songs = await Song.findAll({
-      include: [{ model: User, attributes: ["username"] }],
-    });
-    return res.json(songs);
-  })
-);
+router.use("/:songId(\\d+)/comments", commentsRouter);
+
 
 router.get(
   "/:id(\\d+)",
@@ -38,6 +32,16 @@ router.get(
     } else {
       res.json(song);
     }
+  })
+);
+
+router.get(
+  "/",
+  asyncHandler(async (req, res, next) => {
+    const songs = await Song.findAll({
+      include: [{ model: User, attributes: ["username"] }],
+    });
+    return res.json(songs);
   })
 );
 
