@@ -54,8 +54,8 @@ router.patch(
     } else {
       const update = { ...song, title, public };
       try {
-        if (req.imgFile) {
-          const imgSrc = await singlePublicFileUpload(req.imgFile);
+        if (req.file) {
+          const imgSrc = await singlePublicFileUpload(req.file);
           update.imgSrc = imgSrc;
         }
         const updatedSong = await song.update(update);

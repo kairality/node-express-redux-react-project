@@ -6,6 +6,8 @@ import defaultImg from "../../images/default_album.png";
 import SongDeleteButton from "./SongDeleteButton";
 import SongEditButton from "./SongEditButton";
 
+import "./SongDisplay.css"
+
 function SongDisplay() {
   const { id } = useParams();
   const song = useSelector((state) => state.songs[id]);
@@ -26,10 +28,14 @@ function SongDisplay() {
   return (
     <div className="songDisplay">
       <img src={imgSrc ?? defaultImg} />
-      {title}
-      {username}
-      {userOwnsSong && <SongDeleteButton song={song} />}
-      {userOwnsSong && <SongEditButton song={song} />}
+      <div className="songDisplayDetails">
+        <h2>{title}</h2>
+        <h3>{username}</h3>
+        <div className="songDisplayControls">
+          {userOwnsSong && <SongDeleteButton song={song} />}
+          {userOwnsSong && <SongEditButton song={song} />}
+        </div>
+      </div>
     </div>
   );
 }
