@@ -15,10 +15,6 @@ function SongComments({song}) {
   const currentSong = useSelector((state) => state.currentSong);
   const isCurrentSong = currentSong?.id === song?.id;;
 
-  console.log(currentSong);
-  console.log(song);
-  console.log(isCurrentSong);
-
   const commentFilter = (comment) => {
       const ts = comment.songTimestamp ?? 0;
       if (!isCurrentSong) {

@@ -27,7 +27,6 @@ export default function EditSongForm({song, setShowModal}) {
           editSong(song, {title, privPublic, imgFile}),
         );
         if (updateSong) {
-          console.log("success!");
           setShowModal(false);
         }
   };

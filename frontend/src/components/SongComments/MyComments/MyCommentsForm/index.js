@@ -16,7 +16,6 @@ function MyCommentsForm({ song }) {
     <div className="myComments">
       <ul className="songCommentsContainer">
         {Object.values(filteredComments).map((comment) => {
-          console.log(comment);
           return (
             <div className="commentDelete" key={comment.id}>
               <SingleSongComment

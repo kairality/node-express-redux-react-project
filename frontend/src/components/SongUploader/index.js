@@ -33,9 +33,6 @@ function SongUploader() {
     let newErrors = [];
     const userId = sessionUser.id;
     const song = await dispatch(uploadSong({ userId, title, privPublic, file }));
-    if (song) {
-        console.log("success!");
-    }
   };
 
   return (

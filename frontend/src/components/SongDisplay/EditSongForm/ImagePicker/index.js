@@ -12,7 +12,6 @@ export default function ImagePicker({song, setImgFile}) {
 
 
     useEffect(() => {
-       console.log(image);
        if (image) {
             const imgURL = URL.createObjectURL(image);
             setPreviewImg(imgURL);

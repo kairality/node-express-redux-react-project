@@ -30,7 +30,6 @@ function SongDisplay() {
     }, [dispatch, song]);
 
     const comments = useSelector((state) => state.songComments);
-    console.log(comments);
 
     if (!song) {
       return null;

@@ -23,7 +23,6 @@ export async function csrfFetch(url, options = {}) {
         options.headers["Content-Type"] || "application/json";
     }
     options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
-    console.log(options);
   }
 
   // regular old boring fetch call
