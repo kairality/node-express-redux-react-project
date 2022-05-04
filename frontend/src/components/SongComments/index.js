@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import SingleSongComment from "./SingleSongComment"
+import SongAddComment from "./SongAddComment";
 
 import "./SongComments.css"
 
@@ -16,11 +17,16 @@ function SongComments({song}) {
   }
   const filteredComments = songComments.filter(comment => handleFilter(comment));
   return (
-        <ul className="songCommentsContainer">
-          {Object.values(filteredComments).map((comment) => {
-            return <SingleSongComment song={song} key={comment.id} comment={comment} />;
-          })}
-        </ul>
+    <div className="commentMain">
+      <SongAddComment />
+      <ul className="songCommentsContainer">
+        {Object.values(filteredComments).map((comment) => {
+          return (
+            <SingleSongComment song={song} key={comment.id} comment={comment} />
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
