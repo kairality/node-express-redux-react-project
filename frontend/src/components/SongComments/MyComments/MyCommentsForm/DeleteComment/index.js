@@ -10,7 +10,7 @@ export default function DeleteComment({ comment }) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete Song</button>
+      <button onClick={() => setShowModal(true)}>Delete Comment</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteCommentConfirm comment={comment} setShowModal={setShowModal} />
