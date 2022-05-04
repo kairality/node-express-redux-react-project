@@ -5,6 +5,7 @@ import SingleSongComment from "./SingleSongComment"
 import SongAddComment from "./SongAddComment";
 
 import "./SongComments.css"
+import MyComments from "./MyComments";
 
 
 function SongComments({song}) {
@@ -15,10 +16,14 @@ function SongComments({song}) {
       const ts = comment.songTimestamp ?? 0;
       return playbackTime >= ts && playbackTime <= ts + 15;
   }
-  const filteredComments = songComments.filter(comment => handleFilter(comment));
+  const filteredComments = Object.values(songComments)
+    .filter(comment => handleFilter(comment))
+    .sort(( a, b ) => b.songTimestamp - a.songTimestamp);
+  console.log(filteredComments);
   return (
     <div className="commentMain">
-      <SongAddComment />
+      <SongAddComment song={song} />
+      <MyComments />
       <ul className="songCommentsContainer">
         {Object.values(filteredComments).map((comment) => {
           return (

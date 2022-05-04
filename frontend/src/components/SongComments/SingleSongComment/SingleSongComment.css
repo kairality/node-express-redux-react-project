@@ -4,3 +4,11 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+.singleSongComment {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1em;
+    align-items: center;
+}
