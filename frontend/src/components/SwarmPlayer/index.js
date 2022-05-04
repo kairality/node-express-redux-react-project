@@ -22,7 +22,6 @@ function SwarmPlayer() {
   ];
 
   const startPlaying = (e) => {
-    console.log("onPlay");
     dispatch(resetTimestamp());
   }
 

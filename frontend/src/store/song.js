@@ -58,12 +58,10 @@ export const uploadSong = (data) => async (dispatch) => {
 export const editSong = (song, data) => async (dispatch) => {
   const { id } = song;
   const {title, privPublic, imgFile } = data;
-  console.log(title, privPublic, imgFile);
   const formData = new FormData();
   formData.append("title", title);
   formData.append("public", privPublic);
   if (imgFile) {
-    console.log("here");
     formData.append("imgFile", imgFile);
   }
   const response = await csrfFetch(`/api/songs/${id}`, {
@@ -80,7 +78,6 @@ export const editSong = (song, data) => async (dispatch) => {
 
 export const deleteSong = (song) => async (dispatch) => {
     const songId = song.id;
-    console.log(songId);
     const response = await ezFetch(`/api/songs/${songId}`, "DELETE");
     dispatch(removeSong(song));
 }
@@ -97,7 +94,6 @@ export const genSongs = () => async (dispatch) => {
 const songReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_SONG:
-      console.log(action.payload);
       return { ...state, [action.payload.id]: action.payload };
     case REMOVE_SONG:
       const copyState = { ...state };

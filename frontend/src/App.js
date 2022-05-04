@@ -21,7 +21,6 @@ function App() {
     }, [dispatch]);
 
    const sessionUser = useSelector((state) => state.session.user);
-   console.log(sessionUser);
 
   return (
     isLoaded && (
