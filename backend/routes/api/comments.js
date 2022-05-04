@@ -15,9 +15,14 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const { songId } = req.params;
     const song = await Song.findByPk(songId, {
-      include: [{ model: User, as: "usersCommented" }, { model: SongComment }],
+      include: [
+        { model: User, as: "usersCommented" },
+        {
+          model: SongComment,
+          include: [{ model: User, attributes: ["username"] }],
+        },
+      ],
     });
-    const { SongComment: songComments, usersCommented } = song;
     return res.json({
       songComments: song.SongComments,
       usersCommented: song.usersCommented,
