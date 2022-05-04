@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "Sorry, only John Cage can get away with an empty song title",
+          },
+        },
       },
       src: {
         type: DataTypes.STRING,

@@ -22,13 +22,18 @@ export default function EditSongForm({song, setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newErrors = [];
+    setErrors([]);
     const updateSong = await dispatch(
-          editSong(song, {title, privPublic, imgFile}),
-        );
-        if (updateSong) {
-          setShowModal(false);
+      editSong(song, { title, privPublic, imgFile })
+    ).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
         }
+      );
+      if (updateSong && errors.length === 0) {
+        setShowModal(false);
+      }
   };
 
   return (

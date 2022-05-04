@@ -47,6 +47,7 @@ router.get(
 
 router.patch(
   "/:id(\\d+)",
+  handleValidationErrors,
   singleMulterUpload("imgFile"),
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
