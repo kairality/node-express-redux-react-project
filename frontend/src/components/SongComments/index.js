@@ -12,16 +12,26 @@ function SongComments({song}) {
   const sessionUser = useSelector((state) => state.session.user);
   const songComments = useSelector((state) => state.songComments.comments);
   const playbackTime = useSelector((state) => state.playback.timestamp);
-  const handleFilter = (comment) => {
+  const currentSong = useSelector((state) => state.currentSong);
+  const isCurrentSong = currentSong?.id === song?.id;;
+
+  console.log(currentSong);
+  console.log(song);
+  console.log(isCurrentSong);
+
+  const commentFilter = (comment) => {
       const ts = comment.songTimestamp ?? 0;
+      if (!isCurrentSong) {
+          return ts < 10;
+      }
       return playbackTime >= ts && playbackTime <= ts + 15;
   }
   const filteredComments = Object.values(songComments)
-    .filter(comment => handleFilter(comment))
+    .filter(comment => commentFilter(comment))
     .sort(( a, b ) => b.songTimestamp - a.songTimestamp);
-  console.log(filteredComments);
   return (
     <div className="commentMain">
+      {!isCurrentSong && <h3>Not currently playing</h3>}
       <SongAddComment song={song} />
       <MyComments />
       <ul className="songCommentsContainer">

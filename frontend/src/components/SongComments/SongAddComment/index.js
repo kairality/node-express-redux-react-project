@@ -8,30 +8,43 @@ import { makeComment } from '../../../store/songComments';
 function SongAddComment({song}) {
   const sessionUser = useSelector((state) => state.session.user);
   const playbackTimestamp = useSelector((state) => state.playback.timestamp);
+  const currentSongId = useSelector((state) => state.currentSong?.id);
   const [body, setBody] = useState("");
   const [songTimestamp, setSongTimestamp] = useState(0);
   const [frozen, setFrozen] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  const isCurrentSong = currentSongId === song?.id;
+  const shouldFreeze = !isCurrentSong || body !== "";
+
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newErrors = [];
+    setErrors([]);
     const data = {
         userId: sessionUser.id,
         songId: song.id,
         body,
         songTimestamp,
      };
+     if (data && data.errors) {
+         setErrors(data.errors);
+         return;
+     }
      const comment = await dispatch(makeComment(data));
      setBody("");
      setFrozen(false);
   };
 
-  useEffect(() => {
-      if(!frozen) {
+
+  useEffect(() =>
+    {
+      if (!frozen) {
           setSongTimestamp(Math.floor(playbackTimestamp));
+      }
+      if (!isCurrentSong) {
+          setSongTimestamp(0);
       }
   },[playbackTimestamp])
 
@@ -53,7 +66,7 @@ function SongAddComment({song}) {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             onFocus={(e) => setFrozen(true)}
-            onBlur={(e) => setFrozen(body !== "")}
+            onBlur={(e) => setFrozen(shouldFreeze)}
         />
         <button type="submit">Comment</button>
       </form>
