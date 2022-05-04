@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-import { Modal } from "../../../context/Modal";
+import { Modal } from "../../../../../context/Modal";
 
-import SongDeleteForm from "./SongDeleteForm";
+import DeleteCommentConfirm from "./DeleteCommentConfirm";
 
-export default function SongDeleteButton({ song }) {
-  const dispatch = useDispatch();
+export default function DeleteComment({ comment }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -14,7 +13,7 @@ export default function SongDeleteButton({ song }) {
       <button onClick={() => setShowModal(true)}>Delete Song</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <SongDeleteForm song={song} setShowModal={setShowModal} />
+          <DeleteCommentConfirm comment={comment} setShowModal={setShowModal} />
         </Modal>
       )}
     </>
