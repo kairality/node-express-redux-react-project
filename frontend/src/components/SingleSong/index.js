@@ -12,8 +12,13 @@ function SingleSong({ song, size }) {
   const sessionUser = useSelector((state) => state.session.user);
   const currentSong = useSelector((state) => state.currentSong);
   const thisIsCurrentSong = song.id === currentSong.id;
-  const userOwnsSong = sessionUser.id === song.userId;
   const [isLoading, setIsLoading] = useState(true);
+
+  if (!sessionUser) {
+    return null;
+  }
+
+  const userOwnsSong = sessionUser.id === song.userId;
 
 
 
