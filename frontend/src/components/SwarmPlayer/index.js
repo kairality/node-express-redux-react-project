@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useImperativeHandle } from "react";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { setTimestamp, resetTimestamp, tickTimestamp } from "../../store/playback";
 
 import SingleSong from "../SingleSong";
 
 import "./SwarmPlayer.css";
+import { setCurrentSong } from "../../store/currentSong";
 
 function SwarmPlayer() {
   const currentSong = useSelector((state) => state.currentSong);
+  const dispatch = useDispatch();
 
   const audioList = [
       {name: currentSong.title,
@@ -18,12 +21,27 @@ function SwarmPlayer() {
       },
   ];
 
+  const startPlaying = (e) => {
+    console.log("onPlay");
+    dispatch(resetTimestamp());
+  }
+
+  const whileListening = (e) => {
+    dispatch(setTimestamp(e.target.currentTime));
+  }
+
+  const afterSeeking = (e) => {
+    dispatch(setTimestamp(e.target.currentTime));
+  }
+
   return (
     <div className="swarmPlayer">
       <AudioPlayer
         autoPlay
         src={currentSong.src}
-        onPlay={(e) => console.log("onPlay")}
+        onPlay={startPlaying}
+        onListen={whileListening}
+        onSeeked={afterSeeking}
         customAdditionalControls={[<SingleSong song={currentSong} size={"small"} />]}
       />
     </div>
