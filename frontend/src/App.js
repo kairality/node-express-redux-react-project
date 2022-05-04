@@ -21,7 +21,7 @@ function App() {
     }, [dispatch]);
 
    const sessionUser = useSelector((state) => state.session.user);
-
+   console.log(sessionUser);
 
   return (
     isLoaded && (
@@ -29,10 +29,10 @@ function App() {
         <Navigation isLoaded={isLoaded} />
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/welcome" />
+            {sessionUser ? <Redirect to="songs" / > : <Redirect to="/welcome" />}
           </Route>
           <Route path="/welcome">
-            <Welcome user={sessionUser} />
+            <Welcome />
           </Route>
           <Route path="/songs">
             {sessionUser ?  <></>: <Redirect to="/welcome" />}

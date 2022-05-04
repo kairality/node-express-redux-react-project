@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/session";
+import { useHistory } from "react-router-dom";
 
 import "./ProfileButton.css"
 
 function ProfileButton({ user }) {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -27,9 +29,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    dispatch(logoutUser());
+    await dispatch(logoutUser());
+    history.push("/");
   };
 
   return (

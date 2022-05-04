@@ -2,11 +2,13 @@ import {Redirect} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState, useEffect } from 'react';
 
-function Welcome({user}) {
+function Welcome() {
+
+  const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <>
-      {user ? <Redirect to="/songs" /> : <h1>Welcome, please log in or sign up!</h1>}
+      {sessionUser ? <Redirect to="/songs" /> : <h1>Welcome, please log in or sign up!</h1>}
     </>
   );
 }
