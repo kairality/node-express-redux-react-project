@@ -1,30 +1,37 @@
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import SingleSongComment from "./SingleSongComment"
+import SingleSongComment from "./SingleSongComment";
 import SongAddComment from "./SongAddComment";
 
-import "./SongComments.css"
+import "./SongComments.css";
 import MyComments from "./MyComments";
 
-
-function SongComments({song}) {
+function SongComments({ song }) {
   const sessionUser = useSelector((state) => state.session.user);
   const songComments = useSelector((state) => state.songComments.comments);
   const playbackTime = useSelector((state) => state.playback.timestamp);
   const currentSong = useSelector((state) => state.currentSong);
-  const isCurrentSong = currentSong?.id === song?.id;;
+  const isCurrentSong = currentSong?.id === song?.id;
 
   const commentFilter = (comment) => {
-      const ts = comment.songTimestamp ?? 0;
-      if (!isCurrentSong) {
-          return ts < 10;
+    const ts = comment.songTimestamp ?? 0;
+    if (!isCurrentSong) {
+      return ts < 10;
+    }
+    if (playbackTime - 15 <= ts) {
+      const createTs = new Date(comment.createdAt);
+      const now = Date.now();
+      const secondsElapsed = (now - createTs) / 1000;
+      if (secondsElapsed <= 15) {
+        return true;
       }
-      return playbackTime >= ts && playbackTime <= ts + 15;
-  }
+    }
+    return playbackTime >= ts && playbackTime <= ts + 15;
+  };
   const filteredComments = Object.values(songComments)
-    .filter(comment => commentFilter(comment))
-    .sort(( a, b ) => b.songTimestamp - a.songTimestamp);
+    .filter((comment) => commentFilter(comment))
+    .sort((a, b) => b.songTimestamp - a.songTimestamp);
   return (
     <div className="commentMain">
       {!isCurrentSong && <h3>Not currently playing</h3>}
