@@ -25,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
-          notEmpty: true,
+          notEmpty: {
+            args: true,
+            msg: "You can't leave an empty comment!"
+          }
         },
       },
     },

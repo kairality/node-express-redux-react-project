@@ -8,25 +8,31 @@ function MyCommentsForm({ song }) {
   const sessionUser = useSelector((state) => state.session.user);
   const songComments = useSelector((state) => state.songComments.comments);
   const playbackTime = useSelector((state) => state.playback.timestamp);
-  const handleFilter = (comment) => comment.userId = sessionUser.id;
+  const handleFilter = (comment) => comment.userId === sessionUser.id;
   const filteredComments = Object.values(songComments).filter((comment) =>
     handleFilter(comment)
   );
+  const placeholder =
+    <div className="noComment">
+        <h3> You haven't commented on this song!</h3>
+    </div>
+  const showPlaceholderOnly = filteredComments.length === 0;
   return (
     <div className="myComments">
-      <ul className="songCommentsContainer">
-        {Object.values(filteredComments).map((comment) => {
-          return (
-            <div className="commentDelete" key={comment.id}>
-              <SingleSongComment
-                song={song}
-                comment={comment}
-              />
-              <DeleteComment comment={comment} />
-            </div>
-          );
-        })}
-      </ul>
+      {showPlaceholderOnly ? (
+        { placeholder }
+      ) : (
+        <ul className="songCommentsContainer">
+          {Object.values(filteredComments).map((comment) => {
+            return (
+              <div className="commentDelete" key={comment.id}>
+                <SingleSongComment song={song} comment={comment} />
+                <DeleteComment comment={comment} />
+              </div>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
