@@ -5,3 +5,11 @@
     left: 0px;
     color: black;
 }
+
+.swarmPlayer .singleSong {
+    width: 100%
+}
+
+.rhap_additional-controls {
+    max-width: 45%
+}
