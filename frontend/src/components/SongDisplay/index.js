@@ -14,28 +14,38 @@ import "./SongDisplay.css"
 function SongDisplay() {
   const { id } = useParams();
   const song = useSelector((state) => state.songs[id]);
+  const playbackTime = useSelector((state) => state.playback.timestamp);
 
     const sessionUser = useSelector((state) => state.session.user);
     const currentSongId = useSelector((state) => state.currentSong.id);
     const dispatch = useDispatch();
 
+  // if there is no current song set when we load a song view, go ahead and set it!
+  // this will activate the Swarm Player!
+  // but, we do let people load up the song view without interrupting the current song playing.
   useEffect(() => {
       if (!currentSongId && song) {
           dispatch(setCurrentSong(song));
       }
   }, [currentSongId, song]);
 
+    // load the song's comments from the database
     useEffect(() => {
-    dispatch(genComments(song));
-    }, [dispatch, song]);
+      dispatch(genComments(song));
+      // running genComments as playback time updates allows people to load new eligible comments
+      // from other people listening to the same song at the same time
+      // in essence, this is now Twitch chat, may God have mercy on my soul.
+    }, [dispatch, song, playbackTime]);
 
     const comments = useSelector((state) => state.songComments);
 
-    if (!song) {
+    // bail out early if we're here and there's no song for whatever reason
+    // doing this now avoids having to deal with a bunch of conditional chaining headaches
+    if (!song || !sessionUser) {
       return null;
     }
 
-  const userOwnsSong = sessionUser?.id === song?.userId;
+  const userOwnsSong = sessionUser.id === song.userId;
 
    const {
      title,

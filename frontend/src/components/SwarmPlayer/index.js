@@ -8,11 +8,14 @@ import { setTimestamp, resetTimestamp, tickTimestamp } from "../../store/playbac
 import SingleSong from "../SingleSong";
 
 import "./SwarmPlayer.css";
-import { setCurrentSong } from "../../store/currentSong";
 
 function SwarmPlayer() {
   const currentSong = useSelector((state) => state.currentSong);
   const dispatch = useDispatch();
+
+  if(!currentSong.id) {
+    return null;
+  }
 
   const audioList = [
       {name: currentSong.title,

@@ -6,7 +6,6 @@ import { genSongs } from './store/song';
 
 import Navigation from './components/Navigation';
 import Welcome from './components/Welcome';
-import SongUploader from './components/SongUploader';
 import HomeView from './components/HomeView';
 import SwarmPlayer from './components/SwarmPlayer';
 
@@ -36,7 +35,6 @@ function App() {
           <Route path="/songs">
             {sessionUser ?  <></>: <Redirect to="/welcome" />}
             <h1>Welcome, {sessionUser?.username}</h1>
-            <SongUploader />
             <HomeView />
           </Route>
         </Switch>

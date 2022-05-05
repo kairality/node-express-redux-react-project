@@ -14,18 +14,11 @@ function SongComments({ song }) {
   const currentSong = useSelector((state) => state.currentSong);
   const isCurrentSong = currentSong?.id === song?.id;
 
+
   const commentFilter = (comment) => {
     const ts = comment.songTimestamp ?? 0;
     if (!isCurrentSong) {
       return ts < 10;
-    }
-    if (playbackTime - 15 <= ts) {
-      const createTs = new Date(comment.createdAt);
-      const now = Date.now();
-      const secondsElapsed = (now - createTs) / 1000;
-      if (secondsElapsed <= 15) {
-        return true;
-      }
     }
     return playbackTime >= ts && playbackTime <= ts + 15;
   };
