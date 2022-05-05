@@ -38,23 +38,21 @@ export default function ImagePicker({song, setImgFile}) {
        const [dropChild, setDropChild] = useState(dropArea);
 
 
+    const handleChange = (file) => {
+        const imgURL = URL.createObjectURL(file);
+        setImgFile(file);
+        setPreviewImg(imgURL);
+    };
+
     useEffect(() => {
-            const dropAreaFilled = (
-              <div className="dropArea">
-                {previewImg ? (
-                  <img src={previewImg} />
-                ) : (
-                  <i class="fa-solid fa-file-arrow-up iEmpty"></i>
-                )}
-              </div>
-            );
-       if (image) {
-            const imgURL = URL.createObjectURL(image);
-            setPreviewImg(imgURL);
-            setImgFile(image);
-            setDropChild(dropAreaFilled);
-       }
-    },[image, setImgFile, previewImg])
+        const dropAreaFilled = (
+          <div className="dropArea">
+            <img src={previewImg} />
+            <span>Drag & Drop or Click to Select a Cover Image</span>
+          </div>
+        );
+       setDropChild(dropAreaFilled);
+    },[previewImg]);
 
 
     return (
@@ -62,7 +60,7 @@ export default function ImagePicker({song, setImgFile}) {
           className="setSongImg"
           children={[dropChild]}
           onTypeError={() => setDropChild(dropAreaErrored)}
-          handleChange={(file) => setImage(file)}
+          handleChange={handleChange}
           name="imgFile"
           types={fileTypes}
         />
