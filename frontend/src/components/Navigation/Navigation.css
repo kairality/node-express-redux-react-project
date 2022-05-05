@@ -16,6 +16,10 @@ nav * {
     height: inherit;
 }
 
+nav button {
+    font-size: 1em;
+}
+
 .navbarLogo {
     height: inherit;
     width: auto;
@@ -43,10 +47,19 @@ nav * {
     grid-area: profile;
 }
 
-
 .songUploadButton {
     height: 50px;
     grid-area: upload;
+}
+
+.loginButton {
+    height: 50px;
+    grid-area: login;
+}
+
+.signupButton {
+    height: 50px;
+    grid-area: signup;
 }
 
 
@@ -62,6 +75,11 @@ nav ul {
     list-style: none;
     margin: 0px 0px;
     padding: 0px 0px;
+}
+
+nav ul.loggedOutNav {
+    grid-template-areas: "logo home deadspace login signup";
+    grid-template-columns: 90px 75px 0.95fr 90px 90px;
 }
 
 nav a {

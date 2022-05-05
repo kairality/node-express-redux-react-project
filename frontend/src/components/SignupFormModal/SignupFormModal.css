@@ -1,4 +1,4 @@
-.loginButton  {
+.signupButton  {
     color: #cccccc;
     background-color: #ff5500;
     border-top: none;
@@ -7,7 +7,7 @@
     border-right: 1px solid black;
 }
 
-.loginButton:hover {
+.signupButton:hover {
     background-color: #94BB3F;
     font-weight: bold;
 }

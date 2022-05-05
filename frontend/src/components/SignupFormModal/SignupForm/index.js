@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signupUser } from "../../../store/session";
 
+import "./SignupForm.css"
+
 function SignupForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -29,8 +31,9 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
+    <form className="signUpForm" onSubmit={handleSubmit}>
+      <h3>Join the Swarm!</h3>
+      <ul className={errors.length === 0 ? "noErrorDisplay" : "errorDisplay"}>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}

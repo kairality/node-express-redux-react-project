@@ -9,11 +9,12 @@ import "./Navigation.css";
 
 import logo from "./images/navbarlogo.png";
 
-function Navigation({ isLoaded }) {
+function Navigation({isLoaded}) {
   const sessionUser = useSelector((state) => state.session.user);
+  const loggedOut = !sessionUser;
 
   let sessionLinks;
-  if (sessionUser) {
+  if (!loggedOut) {
     sessionLinks = [
       <SongUploadModal />,
       <ProfileButton user={sessionUser} />,
@@ -28,7 +29,7 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav>
-      <ul>
+      <ul className={loggedOut ? "loggedOutNav" : ""}>
         <li>
           <img className="navbarLogo" src={logo} />
         </li>
