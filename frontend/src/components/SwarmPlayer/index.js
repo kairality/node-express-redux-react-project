@@ -4,7 +4,7 @@ import { useState, useEffect, useImperativeHandle } from "react";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { setTimestamp, resetTimestamp, tickTimestamp } from "../../store/playback";
-
+import { setDuration } from "../../store/currentSong";
 import SingleSong from "../SingleSong";
 
 import "./SwarmPlayer.css";
@@ -36,10 +36,15 @@ function SwarmPlayer() {
     dispatch(setTimestamp(e.target.currentTime));
   }
 
+  const handleLoad = (e) => {
+    dispatch(setDuration(e.target.duration));
+  }
+
   return (
     <div className="swarmPlayer">
       <AudioPlayer
         autoPlay
+        onLoadedData={handleLoad}
         src={currentSong.src}
         onPlay={startPlaying}
         onListen={whileListening}
