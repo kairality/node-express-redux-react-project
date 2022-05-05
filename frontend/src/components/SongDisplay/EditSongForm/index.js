@@ -38,33 +38,35 @@ export default function EditSongForm({song, setShowModal}) {
 
   return (
     <div className="editSongForm">
-      <h1>Edit Song!</h1>
-      {errors.length > 0 &&
-        errors.map((error) => <div key={error}>{error}</div>)}
-      <form
-        style={{ display: "flex", flexFlow: "column" }}
-        onSubmit={handleSubmit}
-      >
-        <label>
+      <form className="songUploadForm" onSubmit={handleSubmit}>
+        <h1>Edit Song!</h1>
+        <div className="formGroup">
+          <label htmlFor="title">Change your song's title:</label>
           <input
+            id="editSongTitleInput"
             type="text"
+            name="title"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
-        <label>
-          Make Private?
+        </div>
+        <div className="formGroup">
+          <label htmlFor="privPublic">Make it Private? </label>
           <input
+            className="songPrivateCheckbox"
             type="checkbox"
+            name="privPublic"
             value={!privPublic}
             checked={!privPublic}
             onChange={() => setPrivPublic((prev) => !prev)}
           />
-        </label>
-        <ImagePicker song={song} setImgFile={setImgFile}/>
+        </div>
+        <ImagePicker song={song} setImgFile={setImgFile} />
         <button type="submit">Update Song</button>
       </form>
+      {errors.length > 0 &&
+        errors.map((error) => <div key={error}>{error}</div>)}
     </div>
   );
 }

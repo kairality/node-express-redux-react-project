@@ -45,13 +45,6 @@ function SongUploader({setShowModal}) {
     </div>
   );
 
-    const dropAreaFilled = (
-      <div className="dropArea">
-        <i class="fa-solid fa-file-circle-check iFilled"></i>
-        <span className="fileName">{file?.name}</span>
-      </div>
-    );
-
   const [dropChild, setDropChild] = useState(dropArea);
 
   const handleChange = (file) => {
@@ -60,6 +53,12 @@ function SongUploader({setShowModal}) {
   };
 
   useEffect(() => {
+        const dropAreaFilled = (
+          <div className="dropArea">
+            <i class="fa-solid fa-file-circle-check iFilled"></i>
+            <span className="fileName">{file?.name}</span>
+          </div>
+        );
     if (file) {
       console.log(file);
       setDropChild(dropAreaFilled);
@@ -68,7 +67,7 @@ function SongUploader({setShowModal}) {
         setTitle(tentativeTitle);
       }
     }
-  },[file])
+  },[file, title])
 
   const dispatch = useDispatch();
 
@@ -114,8 +113,6 @@ function SongUploader({setShowModal}) {
     <div>
       <form className="songUploadForm" onSubmit={handleSubmit}>
         <h1>Upload a song to the swarm!</h1>
-        {errors.length > 0 &&
-          errors.map((error) => <div key={error}>{error}</div>)}
         <div className="formGroup">
           <label htmlFor="title">Title of your masterpiece</label>
           <input
@@ -150,6 +147,10 @@ function SongUploader({setShowModal}) {
         </div>
         <button type="submit">Upload Song</button>
       </form>
+      <ul class="uploadErrors">
+        {errors.length > 0 &&
+          errors.map((error) => <li key={error}>{error}</li>)}
+      </ul>
     </div>
   );
 }
