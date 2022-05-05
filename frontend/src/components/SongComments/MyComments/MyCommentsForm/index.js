@@ -15,12 +15,12 @@ function MyCommentsForm({ song }) {
   const placeholder =
     <div className="noComment">
         <h3> You haven't commented on this song!</h3>
-    </div>
+    </div>;
   const showPlaceholderOnly = filteredComments.length === 0;
   return (
     <div className="myComments">
       {showPlaceholderOnly ? (
-        { placeholder }
+        placeholder
       ) : (
         <ul className="songCommentsContainer">
           {Object.values(filteredComments).map((comment) => {

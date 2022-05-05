@@ -1,0 +1,19 @@
+.songUploadButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    font-size: 1em;
+    background: #ff5500;
+    color: #cccccc;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: none;
+    border-top: none;
+}
+
+.songUploadButton:hover {
+    background-color: #94BB3F;
+    color: #222222;
+    font-weight: bold;
+}

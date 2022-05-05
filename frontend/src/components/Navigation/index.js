@@ -7,35 +7,37 @@ import SongUploadModal from "../SongUploadModal";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
+import logo from "./images/navbarlogo.png";
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = (
-      <>
-        <SongUploadModal />
-        <ProfileButton user={sessionUser} />
-      </>
-    );
+    sessionLinks = [
+      <SongUploadModal />,
+      <ProfileButton user={sessionUser} />,
+    ]
   } else {
-    sessionLinks = (
-      <>
-        <LoginFormModal />
+    sessionLinks = [
+        <LoginFormModal />,
         <SignupFormModal />
-      </>
-    );
+    ];
+
   }
 
   return (
     <nav>
       <ul>
         <li>
+          <img className="navbarLogo" src={logo} />
+        </li>
+        <li>
           <NavLink className="homeButton" exact to="/">
             Home
           </NavLink>
-          {isLoaded && sessionLinks}
         </li>
+        {isLoaded && sessionLinks}
       </ul>
     </nav>
   );

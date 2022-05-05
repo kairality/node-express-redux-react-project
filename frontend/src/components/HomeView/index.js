@@ -5,13 +5,15 @@ import SingleSong from "../SingleSong";
 import SwarmPlayer from "../SwarmPlayer";
 import SongDisplay from "../SongDisplay";
 
+import "./HomeView.css"
+
 function HomeView() {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
   return (
     <Switch>
       <Route path="/songs" exact>
-        <ul>
+        <ul className="songsList">
           {Object.values(songs).map(song => {
               return (
                   <SingleSong song={song} key={song.id} />
