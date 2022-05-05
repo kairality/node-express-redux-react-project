@@ -43,13 +43,13 @@ function ProfileButton({ user }) {
         <div className="profileControls">
           <img className="avatar" src={defaultAvatar} />
           <span className="userInfo">{user?.username}</span>
-          <i class="fa-solid fa-circle-chevron-down"></i>
+          <i className="fa-solid fa-circle-chevron-down"></i>
         </div>
         {showMenu && (
           <ul className="profile-dropdown">
             <li>
               <button onClick={handleLogout}>
-                <i class="fa-solid fa-person-from-portal"></i>
+                <i className="fa-solid fa-person-through-window"></i>
                 <span>Log Out</span>
               </button>
             </li>

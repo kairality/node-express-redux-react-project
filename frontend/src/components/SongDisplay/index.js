@@ -55,15 +55,19 @@ function SongDisplay() {
 
   return (
     <div className="songDisplay">
-      <img src={imgSrc ?? defaultImg} onClick={() => dispatch(setCurrentSong(song))}/>
+      <img
+        className="songDisplayCover"
+        src={imgSrc ?? defaultImg}
+        onClick={() => dispatch(setCurrentSong(song))}
+      />
       <div className="songDisplayDetails">
         <h2>{title}</h2>
         <h3>{username}</h3>
-        <SongComments song={song}/>
-        <div className="songDisplayControls">
-          {userOwnsSong && <SongDeleteButton song={song} />}
-          {userOwnsSong && <SongEditButton song={song} />}
-        </div>
+      </div>
+      <SongComments song={song} />
+      <div className="songDisplayControls">
+        {userOwnsSong && <SongDeleteButton song={song} />}
+        {userOwnsSong && <SongEditButton song={song} />}
       </div>
     </div>
   );
