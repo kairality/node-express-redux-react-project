@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { useSelector } from "react-redux";
-import { uploadSong } from "../../store/song";
+import { uploadSong } from "../../../store/song";
 import {useDispatch} from 'react-redux';
 
 const fileTypes = [

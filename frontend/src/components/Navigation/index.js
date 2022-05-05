@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SIgnupFormModal";
+import SignupFormModal from "../SignupFormModal";
+import SongUploadModal from "../SongUploadModal";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
@@ -11,7 +12,12 @@ function Navigation({ isLoaded }) {
 
   let sessionLinks;
   if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
+    sessionLinks = (
+      <>
+        <SongUploadModal />
+        <ProfileButton user={sessionUser} />
+      </>
+    );
   } else {
     sessionLinks = (
       <>

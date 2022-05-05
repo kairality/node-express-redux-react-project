@@ -3,13 +3,73 @@
     position: fixed;
     bottom: 0px;
     left: 0px;
-    color: black;
+    margin: 0px;
+    box-shadow: 0px -4px 4px rgba(0,0,0,0.4);
+    height: 120px;
 }
 
 .swarmPlayer .singleSong {
-    width: 100%
+    width: 100%;
+    color: #cccccc;
+}
+
+.swarmPlayer .singleSong:hover {
+    background-color: #333333 ;
 }
 
 .rhap_additional-controls {
     max-width: 45%
+}
+
+.rhap_container {
+  background-color: #333333;
+}
+
+.rhap_controls-section {
+  margin: 1em;
+}
+
+.rhap_progress-section {
+  height: 20px;
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+}
+
+.rhap_main-controls-button {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+
+.rhap_main-controls-button svg {
+  color: #ff5500;
+  width: 100%;
+  height: 100%;
+}
+
+.rhap_main-controls-button svg:hover {
+  color: #94BB3F;
+}
+
+.rhap_progress-indicator {
+  background-color: #ff5500;
+}
+
+.rhap_progress-filled {
+    background-color: #635994;
+}
+.rhap_progress-indicator:hover {
+   background-color: #94BB3F;
+}
+
+.rhap_button-clear.rhap_volume-button {
+  color: #ff5500;
+}
+
+.rhap_volume-bar {
+  background-color: #ff5500;
+}
+
+.rhap_volume-indicator {
+    background-color: #94BB3F;
 }
