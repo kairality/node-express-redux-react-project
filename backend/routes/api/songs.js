@@ -19,9 +19,9 @@ const {
 router.use("/:songId(\\d+)/comments", commentsRouter);
 
 
-const validateSong = check("file")
+const validateSongTitle = check("title")
   .exists({ checkFalsy: true })
-  .withMessage("Sorry, only famous American Composer John Cage can get away with an empty song!");
+  .withMessage("You have to call it something!")
 
 
 router.get(
@@ -52,8 +52,9 @@ router.get(
 
 router.patch(
   "/:id(\\d+)",
-  handleValidationErrors,
   singleMulterUpload("imgFile"),
+  validateSongTitle,
+  handleValidationErrors,
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { title, public, imgSrc } = req.body;
@@ -98,13 +99,14 @@ router.delete(
 
 router.post(
   "/",
-  validateSong,
-  handleValidationErrors,
   singleMulterUpload("file"),
+  validateSongTitle,
+  handleValidationErrors,
   asyncHandler(async (req, res, next) => {
     const { userId, title, public } = req.body;
-    const src = await singlePublicFileUpload(req.file);
+    console.log(userId, title, public);
     try {
+      const src = await singlePublicFileUpload(req.file);
       const song = await Song.create({ userId, title, src, public });
       const songId = song.id;
       const fetchedSong = await Song.findByPk(songId, {
