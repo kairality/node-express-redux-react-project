@@ -6,6 +6,7 @@ import { editSong } from "../../../store/song";
 import ImagePicker from "./ImagePicker";
 
 import "./EditSongForm.css";
+import { setCurrentSong } from "../../../store/currentSong";
 
 export default function EditSongForm({song, setShowModal}) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -13,10 +14,7 @@ export default function EditSongForm({song, setShowModal}) {
   const [title, setTitle] = useState(song?.title)
   const [privPublic, setPrivPublic] = useState(song?.public);
   const [errors, setErrors] = useState([]);
-
-  const handleChange = (file) => {
-    setImgFile(file);
-  };
+  const currentSong = useSelector((state) => state.currentSong);
 
   const dispatch = useDispatch();
 
@@ -31,6 +29,9 @@ export default function EditSongForm({song, setShowModal}) {
           if (data && data.errors) setErrors(data.errors);
         }
       );
+      if (currentSong?.id === song.id) {
+        dispatch(setCurrentSong(updateSong));
+      }
       if (updateSong && errors.length === 0) {
         setShowModal(false);
       }
