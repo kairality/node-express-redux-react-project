@@ -19,6 +19,11 @@ const {
 router.use("/:songId(\\d+)/comments", commentsRouter);
 
 
+const validateSong = check("file")
+  .exists({ checkFalsy: true })
+  .withMessage("Sorry, only famous American Composer John Cage can get away with an empty song!");
+
+
 router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res, next) => {
@@ -93,6 +98,8 @@ router.delete(
 
 router.post(
   "/",
+  validateSong,
+  handleValidationErrors,
   singleMulterUpload("file"),
   asyncHandler(async (req, res, next) => {
     const { userId, title, public } = req.body;
