@@ -12,3 +12,23 @@
     gap: 1em;
     align-items: center;
 }
+
+.songCommentHead {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.songCommentHead h3 {
+    align-self: flex-start;
+}
+
+.songCommentTs {
+    font-size: 1em;
+    color: #777777;
+}
+
+.songCommentTs.hidden {
+    display: none;
+}

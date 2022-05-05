@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import SingleSongComment from "../../SingleSongComment";
 import DeleteComment from "./DeleteComment";
 
+import "./MyCommentsForm.css";
+
 function MyCommentsForm({ song }) {
   const sessionUser = useSelector((state) => state.session.user);
   const songComments = useSelector((state) => state.songComments.comments);
@@ -25,10 +27,10 @@ function MyCommentsForm({ song }) {
         <ul className="songCommentsContainer">
           {Object.values(filteredComments).map((comment) => {
             return (
-              <div className="commentDelete" key={comment.id}>
+              <li className="commentDelete" key={comment.id}>
                 <SingleSongComment song={song} comment={comment} />
                 <DeleteComment comment={comment} />
-              </div>
+              </li>
             );
           })}
         </ul>

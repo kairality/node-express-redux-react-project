@@ -1,0 +1,13 @@
+.myComments {
+    height: 500px;
+    width: 500px;
+}
+
+.songCommentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-height: 500px;
+    width: auto;
+    overflow-y: scroll;
+}
