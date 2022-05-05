@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/session";
 import { useHistory } from "react-router-dom";
 
+import defaultAvatar from "../../../images/default_album.png";
+
 import "./ProfileButton.css"
 
 function ProfileButton({ user }) {
@@ -37,18 +39,23 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button id="userMenu" onClick={openMenu}>
-        <i className="fa-solid fa-address-card"></i>
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={handleLogout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      <div className="profile-top" onClick={openMenu}>
+        <div className="profileControls">
+          <img className="avatar" src={defaultAvatar} />
+          <span className="userInfo">{user?.username}</span>
+          <i class="fa-solid fa-circle-chevron-down"></i>
+        </div>
+        {showMenu && (
+          <ul className="profile-dropdown">
+            <li>
+              <button onClick={handleLogout}>
+                <i class="fa-solid fa-person-from-portal"></i>
+                <span>Log Out</span>
+              </button>
+            </li>
+          </ul>
+        )}
+      </div>
     </>
   );
 }

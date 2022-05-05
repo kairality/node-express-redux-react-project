@@ -1,7 +1,7 @@
 .songDisplay {
     display: flex;
     background-color: black;
-    position: relative;
+    /* position: relative; */
 }
 
 .songDisplay img {

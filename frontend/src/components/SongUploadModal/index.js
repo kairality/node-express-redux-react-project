@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import { Modal } from "../../context/Modal";
+import "./SongUploadModal.css";
 
 import SongUploader from "./SongUploader";
 
@@ -17,7 +18,7 @@ export default function SongUploadModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Upload</button>
+      <button className="songUploadButton" onClick={() => setShowModal(true)}>Upload</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <SongUploader />
