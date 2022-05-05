@@ -31,15 +31,15 @@ function SongUploader({setShowModal}) {
 
   const dropArea = (
     <div className="dropArea">
-      <i className="fa-solid fa-file"></i>
+      <i class="fa-solid fa-file-arrow-up iEmpty"></i>
       <span>Drag & Drop or Click to Select a File</span>
       {typeArea}
     </div>
   );
 
   const dropAreaErrored = (
-    <div className="dropArea">
-      <i className="fa-solid fa-file"></i>
+    <div className="dropArea ">
+      <i class="fa-solid fa-file-circle-xmark iError"></i>
       <span className="fileError">Unable to upload that file.</span>
       {typeArea}
     </div>
@@ -47,7 +47,7 @@ function SongUploader({setShowModal}) {
 
     const dropAreaFilled = (
       <div className="dropArea">
-        <i className="fa-solid fa-file"></i>
+        <i class="fa-solid fa-file-circle-check iFilled"></i>
         <span className="fileName">{file?.name}</span>
       </div>
     );
@@ -63,6 +63,10 @@ function SongUploader({setShowModal}) {
     if (file) {
       console.log(file);
       setDropChild(dropAreaFilled);
+      if (!title) {
+        const tentativeTitle = file.name.split(".").slice(0, -1).join(".");
+        setTitle(tentativeTitle);
+      }
     }
   },[file])
 
@@ -71,7 +75,16 @@ function SongUploader({setShowModal}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newErrors = [];
+    if (!file) {
+      newErrors.push(
+        "Sorry, only famous American composer John Cage can get away with an empty song"
+      );
+      return setErrors(newErrors);
+    }
+
     const userId = sessionUser.id;
+    console.log(userId, title, privPublic, file);
     const song = await dispatch(
       uploadSong({ userId, title, privPublic, file }),
     ).catch(
@@ -99,26 +112,25 @@ function SongUploader({setShowModal}) {
 
   return (
     <div>
-      <h1>Upload a song to the swarm!</h1>
-      {errors.length > 0 &&
-        errors.map((error) => <div key={error}>{error}</div>)}
-      <form
-        style={{ display: "flex", flexFlow: "column" }}
-        onSubmit={handleSubmit}
-      >
+      <form className="songUploadForm" onSubmit={handleSubmit}>
+        <h1>Upload a song to the swarm!</h1>
+        {errors.length > 0 &&
+          errors.map((error) => <div key={error}>{error}</div>)}
         <div className="formGroup">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Title of your masterpiece</label>
           <input
+            id="songTitleInput"
             type="text"
             name="title"
-            placeholder="Title"
+            placeholder="Enter a song title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div className="formGroup">
-          <label htmlFor="privPublic">Make Private?</label>
+          <label htmlFor="privPublic">Make it Private? </label>
           <input
+            className="songPrivateCheckbox"
             type="checkbox"
             name="privPublic"
             value={!privPublic}

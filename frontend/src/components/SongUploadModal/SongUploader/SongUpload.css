@@ -18,6 +18,17 @@
 .dropArea i {
     font-size: 5em;
     opacity: 50%;
+}
+
+.iFilled {
+  color: #94BB3F;
+}
+
+.iError {
+    color: red;
+}
+
+.iEmpty {
     color: #ff5500;
 }
 
@@ -36,4 +47,63 @@
     display: flex;
     justify-content: center;
     font-size: 0.75em;
+}
+
+.songUploadForm {
+    width: 600px;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.songUploadForm h1 {
+    margin: 1em;
+}
+
+#songTitleInput {
+    height: 36px;
+    border: none;
+    min-width: 400px;
+    background-color: #cccccc;
+    color: #222222;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#songTitleInput::placeholder {
+    text-align: center;
+}
+
+.songUploadForm .formGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.songUploadForm button  {
+    color: #cccccc;
+    background-color: #ff5500;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 2px 3px 2px rgba(0,0,0,0.4);
+    padding: 1em;
+}
+
+.songUploadForm button:hover {
+    background-color: #94BB3F;
+    font-weight: bold;
+}
+
+.songPrivateCheckbox {
+    height: 20px;
+    width: 20px;
 }
