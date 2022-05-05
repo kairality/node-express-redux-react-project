@@ -1,4 +1,7 @@
 nav {
+    position: fixed;
+    left: 0px;
+    top: 0px;
     display: block;
     height: 50px;
     width: 100%;
