@@ -13,19 +13,21 @@ function HomeView() {
   return (
     <Switch>
       <Route path="/songs" exact>
-        <ul className="songsList">
-          {Object.values(songs).map(song => {
-              return (
-                  <SingleSong song={song} key={song.id} />
-              )
-          })}
-      </ul>
+        <div className="wrapper">
+          <h1>All Songs</h1>
+          <ul className="songsList">
+            {Object.values(songs).map((song) => {
+              return <SingleSong song={song} key={song.id} />;
+            })}
+          </ul>
+        </div>
       </Route>
       <Route path="/songs/:id">
-        <SongDisplay />
+        <div className="wrapper">
+          <SongDisplay />
+        </div>
       </Route>
     </Switch>
-
   );
 }
 

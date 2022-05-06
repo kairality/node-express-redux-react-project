@@ -8,6 +8,9 @@ import "./SingleSongComment.css";
 
 function SingleSongComment({ song, comment }) {
   const sessionUser = useSelector((state) => state.session.user);
+  if(!sessionUser) {
+    return null;
+  }
   const ts = comment.songTimestamp;
   return (
     <div className={`singleSongComment`}>
@@ -16,7 +19,7 @@ function SingleSongComment({ song, comment }) {
         <div className="songCommentHead">
           <h3>{comment?.User?.username}</h3>
           <span className={`songCommentTs${ts ? "" : " hidden"}`}>
-            {ts < 60 ? `at ${ts} seconds` : tsFormat(ts)}
+            {ts < 60 ? `at ${ts} seconds` : `at ${tsFormat(ts)}`}
           </span>
         </div>
         {comment?.body}

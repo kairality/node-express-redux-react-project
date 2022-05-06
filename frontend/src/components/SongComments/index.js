@@ -29,9 +29,9 @@ function SongComments({ song }) {
     .sort((a, b) => b.songTimestamp - a.songTimestamp);
   return (
     <div className="commentMain">
-      {!isCurrentSong && <h3>Not currently playing</h3>}
-      <SongAddComment song={song} />
-      <MyComments />
+      <div className="commentAdd">
+        <SongAddComment song={song} />
+      </div>
       <ul className="songCommentsContainer">
         {Object.values(filteredComments).map((comment) => {
           return (
