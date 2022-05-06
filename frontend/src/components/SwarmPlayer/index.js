@@ -13,10 +13,6 @@ function SwarmPlayer() {
   const currentSong = useSelector((state) => state.currentSong);
   const dispatch = useDispatch();
 
-  if(!currentSong.id) {
-    return null;
-  }
-
   const audioList = [
       {name: currentSong.title,
         singer: currentSong.userId,
@@ -45,7 +41,7 @@ function SwarmPlayer() {
       <AudioPlayer
         autoPlay
         onLoadedData={handleLoad}
-        src={currentSong.src}
+        src={currentSong?.src}
         onPlay={startPlaying}
         onListen={whileListening}
         onSeeked={afterSeeking}

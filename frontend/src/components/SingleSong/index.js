@@ -36,7 +36,7 @@ function SingleSong({ song, size }) {
     >
       <img className="songTileImg" src={song.imgSrc ?? defaultImg} />
       <div className="songTileDetail">
-        <h3>{title}</h3>
+        <h3>{title ?? "No song playing! Pick one!"}</h3>
         <p>{username}</p>
       </div>
     </li>
