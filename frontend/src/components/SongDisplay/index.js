@@ -9,6 +9,7 @@ import SongEditButton from "./SongEditButton";
 import SongComments from "../SongComments";
 
 import "./SongDisplay.css";
+import MyComments from "../SongComments/MyComments";
 
 function SongDisplay() {
   const { id } = useParams();
@@ -67,6 +68,7 @@ function SongDisplay() {
       <div className="songDisplayControls">
         {userOwnsSong && <SongDeleteButton song={song} />}
         {userOwnsSong && <SongEditButton song={song} />}
+        <MyComments />
       </div>
     </div>
   );

@@ -1,4 +1,80 @@
+.commentsMain {
+    display: grid;
+    grid-template-areas:
+      "controls"
+      "comments";
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px 1fr;
+}
+
+.commentsInput {
+    display: flex;
+    gap: 1em;
+}
+
+.commentMain button  {
+    color: #cccccc;
+    background-color: #ff5500;
+    border: none;
+    font-size: 1em;
+    border-radius: 8px;
+    box-shadow: 2px 3px 2px rgba(0,0,0,0.4);
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.ticker {
+    margin-bottom: 8px;
+    color: #666666;
+}
+
+.commentMain button:hover {
+    background-color: #94BB3F;
+    font-weight: bold;
+}
+
+
+.commentAdd {
+    grid-area: controls;
+}
+
+.commentAddForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.commentAddForm input {
+    min-width: 75%;
+    font-size: 1.5em;
+    height: 50px;
+    background-color: #cccccc;
+    color: #222222;
+    border: none;
+    border-radius: 16px;
+    padding: 1em;
+}
+
+.myCommentsShow {
+    min-width: fit-content;
+    padding: 8px 4px;
+}
+
+.myCommentsShow:hover {
+    background-color: #635994;
+}
+
+
 .songCommentsContainer {
+    grid-area: comments;
+    height: 100%;
+    width: 100%;
     background-color: aliceblue;
     list-style: none;
+    overflow-x: none;
+    overflow-y: scroll;
+    margin-bottom: 0px;
+    display: flex;
+    flex-flow: column;
 }

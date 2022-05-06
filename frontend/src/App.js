@@ -34,7 +34,6 @@ function App() {
           </Route>
           <Route path="/songs">
             {sessionUser ?  <></>: <Redirect to="/welcome" />}
-            <h1>Welcome, {sessionUser?.username}</h1>
             <HomeView />
           </Route>
         </Switch>

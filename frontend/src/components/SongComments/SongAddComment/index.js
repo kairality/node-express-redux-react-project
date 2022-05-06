@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { makeComment } from '../../../store/songComments';
@@ -46,31 +45,30 @@ function SongAddComment({song}) {
       if (!isCurrentSong) {
           setSongTimestamp(0);
       }
-  },[playbackTimestamp])
+  },[playbackTimestamp, frozen, isCurrentSong])
 
   const handleFocus = (e) => {
       setFrozen(true);
   }
 
   return (
-    <div>
-      <form
-        style={{ display: "flex", flexFlow: "row" }}
-        onSubmit={handleSubmit}
-      >
-        <label htmlFor="body">Comment at: {songTimestamp} seconds</label>
+    <form className="commentAddForm" onSubmit={handleSubmit}>
+      <div className="commentsInput">
         <input
-            type="text"
-            name="body"
-            placeholder="Leave a comment... "
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            onFocus={(e) => setFrozen(true)}
-            onBlur={(e) => setFrozen(shouldFreeze)}
+          type="text"
+          name="body"
+          placeholder="Leave a comment... "
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          onFocus={(e) => setFrozen(true)}
+          onBlur={(e) => setFrozen(shouldFreeze)}
         />
         <button type="submit">Comment</button>
-      </form>
-    </div>
+      </div>
+      <label className="ticker" htmlFor="body">
+        Comment at: {songTimestamp} seconds
+      </label>
+    </form>
   );
 }
 

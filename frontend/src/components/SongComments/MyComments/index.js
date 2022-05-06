@@ -11,7 +11,7 @@ export default function MyComments({ song }) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>My Comments</button>
+      <button className="myCommentsShow" onClick={() => setShowModal(true)}>My Comments</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <MyCommentsForm setShowModal={setShowModal} />
