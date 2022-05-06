@@ -12,6 +12,7 @@ function SongAddComment({song}) {
   const [songTimestamp, setSongTimestamp] = useState(0);
   const [frozen, setFrozen] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [disabled, setDisabled] = useState(true);
 
   const isCurrentSong = currentSongId === song?.id;
   const shouldFreeze = !isCurrentSong || body !== "";
@@ -36,6 +37,10 @@ function SongAddComment({song}) {
      setFrozen(false);
   };
 
+  useEffect(() => {
+    setDisabled(body.length === 0)
+  },[body])
+
 
   useEffect(() =>
     {
@@ -47,9 +52,6 @@ function SongAddComment({song}) {
       }
   },[playbackTimestamp, frozen, isCurrentSong])
 
-  const handleFocus = (e) => {
-      setFrozen(true);
-  }
 
   return (
     <form className="commentAddForm" onSubmit={handleSubmit}>
@@ -63,7 +65,7 @@ function SongAddComment({song}) {
           onFocus={(e) => setFrozen(true)}
           onBlur={(e) => setFrozen(shouldFreeze)}
         />
-        <button type="submit">Comment</button>
+        <button disabled={disabled} type="submit">Comment</button>
       </div>
       <label className="ticker" htmlFor="body">
         Comment at: {songTimestamp} seconds

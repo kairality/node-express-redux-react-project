@@ -33,6 +33,12 @@
     font-weight: bold;
 }
 
+.commentMain button:disabled {
+    background-color: #666666;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
 
 .commentAdd {
     grid-area: controls;
