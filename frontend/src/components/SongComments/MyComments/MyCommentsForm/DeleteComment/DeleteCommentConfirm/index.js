@@ -12,9 +12,9 @@ export default function DeleteCommentConfirm({ comment }) {
   };
 
   return (
-    <div classname="deleteForm">
+    <div className="deleteForm">
       <h3>Delete Comment?</h3>
-      <button onClick={handleDelete}>Confirm Delete</button>
+      <button className="confirmDelete" onClick={handleDelete}>Confirm Delete</button>
     </div>
   );
 }

@@ -6,6 +6,7 @@
 
 body {
     color: #222222;
+    margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
     overflow-y: hidden;
@@ -14,9 +15,8 @@ body {
 .wrapper {
     padding-top: 1em;
     padding-left: 1em;
-    max-height: 90%;
+    max-height: 750px;
     overflow-y: scroll;
-    margin-bottom: 150px;
 }
 
 h1 {
@@ -33,4 +33,20 @@ h1 {
 
 .alsoCrying {
     height: 50px;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-track {
+  background: #222222
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff5500;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
 }
