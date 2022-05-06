@@ -9,13 +9,11 @@ This is a Soundcloud-inspired music player app.  You can upload music, listen to
 
    `git clone git@github.com:kairality/songswarm.git`
 
-2. Install dependencies
+2. Install dependencies with `npm install`
 
-   `npm install`
+3. Create a .env file based on the examples given ... however you will need an AWS bucket and key. You will need to do this in the frontend and backend folders.
 
-3. Create a .env file based on the example given ... however you will need an AWS bucket and key.
-
-4. Set up your database user with DBCREATE permission.
+4. Set up your database user with the DBCREATE permission.
 
 5. Migrate and Seed models
    `npx dotenv sequelize-cli db:create`
@@ -30,3 +28,5 @@ But it might be annoying to set up an AWS account just to test this, so why not 
 
 ### Live
 https://songswarm.herokuapp.com/
+
+Note: demo user login is controlled via an environmental variable, I may occasionally have it disabled if I am presenting this project, etc.
