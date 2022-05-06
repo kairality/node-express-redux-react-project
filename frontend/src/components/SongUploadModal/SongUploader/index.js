@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { useSelector } from "react-redux";
 import { uploadSong } from "../../../store/song";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 
-import "./SongUpload.css"
+import "./SongUpload.css";
 
 const fileTypes = [
   "WAV",
@@ -17,17 +17,16 @@ const fileTypes = [
   "AMR",
   "WMA",
 ];
-function SongUploader({setShowModal}) {
+function SongUploader({ setShowModal }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [privPublic, setPrivPublic] = useState(true);
   const [errors, setErrors] = useState([]);
 
-  const typeArea =
-    <span className="fileTypes">
-      Accepted Types: {fileTypes.join(", ")}
-    </span>
+  const typeArea = (
+    <span className="fileTypes">Accepted Types: {fileTypes.join(", ")}</span>
+  );
 
   const dropArea = (
     <div className="dropArea">
@@ -50,27 +49,25 @@ function SongUploader({setShowModal}) {
   const handleChange = (file) => {
     setFile(file);
     setErrors([]);
+    if (!title) {
+      const tentativeTitle = file.name.split(".").slice(0, -1).join(".");
+      setTitle(tentativeTitle);
+    }
   };
 
   useEffect(() => {
-        const dropAreaFilled = (
-          <div className="dropArea">
-            <i class="fa-solid fa-file-circle-check iFilled"></i>
-            <span className="fileName">{file?.name}</span>
-          </div>
-        );
+    const dropAreaFilled = (
+      <div className="dropArea">
+        <i class="fa-solid fa-file-circle-check iFilled"></i>
+        <span className="fileName">{file?.name}</span>
+      </div>
+    );
     if (file) {
-      console.log(file);
       setDropChild(dropAreaFilled);
-      if (!title) {
-        const tentativeTitle = file.name.split(".").slice(0, -1).join(".");
-        setTitle(tentativeTitle);
-      }
     }
-  },[file, title])
+  }, [file, title]);
 
   const dispatch = useDispatch();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,13 +82,11 @@ function SongUploader({setShowModal}) {
     const userId = sessionUser.id;
     console.log(userId, title, privPublic, file);
     const song = await dispatch(
-      uploadSong({ userId, title, privPublic, file }),
-    ).catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+      uploadSong({ userId, title, privPublic, file })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
     if (song && errors.length === 0) {
       setShowModal(false);
     }
@@ -106,8 +101,7 @@ function SongUploader({setShowModal}) {
     setDropChild(dropAreaErrored);
     setFile(null);
     return "That file extension is not audio or it's too hip for us!";
-
-  }
+  };
 
   return (
     <div>

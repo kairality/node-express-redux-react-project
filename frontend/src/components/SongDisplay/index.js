@@ -48,6 +48,7 @@ function SongDisplay() {
   }
 
   const userOwnsSong = sessionUser.id === song.userId;
+  const isCurrentSong = currentSongId === song.id;
 
   const {
     title,
@@ -57,11 +58,14 @@ function SongDisplay() {
 
   return (
     <div className="songDisplay">
-      <img
-        className="songDisplayCover"
-        src={imgSrc ?? defaultImg}
-        onClick={() => dispatch(setCurrentSong(song))}
-      />
+      <div className="cover">
+        <img
+          className="songDisplayCover"
+          src={imgSrc ?? defaultImg}
+          onClick={() => dispatch(setCurrentSong(song))}
+        />
+        {isCurrentSong ? null : <i class="fa-solid fa-play playIcon"></i>}
+      </div>
       <div className="songDisplayDetails">
         <h2>{title}</h2>
         <h3>{username}</h3>

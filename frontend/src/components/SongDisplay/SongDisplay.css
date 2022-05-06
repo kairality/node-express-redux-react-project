@@ -14,7 +14,6 @@
     width: 500px;
     height: 500px;
     object-fit: cover;
-    grid-area: photo;
     border-radius: 16px;
     box-shadow: 2px 4px 2px rgba(0,0,0,0.4);
 }
@@ -63,4 +62,27 @@
 
 .songDeleteButton:hover {
     background-color: red;
+}
+
+.cover {
+    grid-area: photo;
+    position: relative;
+    height: 500px;
+    width: 500px;
+}
+
+.playIcon {
+    font-size: 500px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 500px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    z-index: 4;
+    opacity: 40%;
+    color: black;
+    pointer-events: none;
+
 }
