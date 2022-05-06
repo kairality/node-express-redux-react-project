@@ -1,5 +1,7 @@
 # Songswarm
-## listen to music in the ... swarm?
+## Listen to music in the ... swarm?
+
+This is a Soundcloud-inspired music player app.  You can upload music, listen to music, and currently, comment on music. More features to come!
 
 ### Getting started
 
