@@ -11,7 +11,7 @@ export default function SongDeleteButton({ song }) {
 
   return (
     <>
-      <button className="songDeleteButton" onClick={() => setShowModal(true)}>Delete Song</button>
+      <button className="songDeleteBtn" onClick={() => setShowModal(true)}>Delete Song</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <SongDeleteForm song={song} setShowModal={setShowModal} />

@@ -22,7 +22,7 @@ export default function SongDeleteForm({song, setShowModal}) {
   return (
     <div classname="deleteForm">
       <h3>Delete Song?</h3>
-      <button onClick={handleDelete}>Confirm Delete</button>
+      <button className="confirmDelete" onClick={handleDelete}>Confirm Delete</button>
     </div>
   );
 }
