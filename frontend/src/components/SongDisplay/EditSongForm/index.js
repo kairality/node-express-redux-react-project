@@ -66,8 +66,10 @@ export default function EditSongForm({song, setShowModal}) {
         <ImagePicker song={song} setImgFile={setImgFile} />
         <button type="submit">Update Song</button>
       </form>
-      {errors.length > 0 &&
-        errors.map((error) => <div key={error}>{error}</div>)}
+      <ul className="editErrors">
+        {errors.length > 0 &&
+          errors.map((error) => <li key={error}>{error}</li>)}
+      </ul>
     </div>
   );
 }
