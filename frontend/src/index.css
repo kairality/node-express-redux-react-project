@@ -6,14 +6,31 @@
 
 body {
     color: #222222;
-    margin-top: 50px;
-    margin-bottom: 120pxcr;
     margin-left: 0px;
     margin-right: 0px;
+    overflow-y: hidden;
 }
 
+.wrapper {
+    padding-top: 1em;
+    padding-left: 1em;
+    max-height: 90%;
+    overflow-y: scroll;
+    margin-bottom: 150px;
+}
 
 h1 {
     margin-left: 1em;
     font-weight: bold;
+}
+
+.crying {
+    display: block;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.alsoCrying {
+    height: 50px;
 }

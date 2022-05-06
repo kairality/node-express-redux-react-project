@@ -13,6 +13,7 @@ function HomeView() {
   return (
     <Switch>
       <Route path="/songs" exact>
+        <div className="alsoCrying" />
         <div className="wrapper">
           <h1>All Songs</h1>
           <ul className="songsList">
@@ -21,11 +22,14 @@ function HomeView() {
             })}
           </ul>
         </div>
+        <div className="crying" />
       </Route>
       <Route path="/songs/:id">
+        <div className="alsoCrying" />
         <div className="wrapper">
           <SongDisplay />
         </div>
+        <div className="crying" />
       </Route>
     </Switch>
   );
