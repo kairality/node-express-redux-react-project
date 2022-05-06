@@ -28,8 +28,8 @@ function MyCommentsForm({ song }) {
           {Object.values(filteredComments).map((comment) => {
             return (
               <li className="commentDelete" key={comment.id}>
-                <SingleSongComment song={song} comment={comment} />
                 <DeleteComment comment={comment} />
+                <SingleSongComment song={song} comment={comment} />
               </li>
             );
           })}
