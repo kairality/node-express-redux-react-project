@@ -1,4 +1,4 @@
-.commentsMain {
+.commentMain {
     display: grid;
     grid-template-areas:
       "controls"
@@ -70,7 +70,6 @@
     grid-area: comments;
     height: 100%;
     width: 100%;
-    background-color: aliceblue;
     list-style: none;
     overflow-x: none;
     overflow-y: scroll;

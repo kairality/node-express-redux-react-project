@@ -7,6 +7,7 @@ import { genComments } from "../../store/songComments";
 import SongDeleteButton from "./SongDeleteButton";
 import SongEditButton from "./SongEditButton";
 import SongComments from "../SongComments";
+import SingleSong from "../SingleSong";
 
 import "./SongDisplay.css";
 import MyComments from "../SongComments/MyComments";
@@ -14,6 +15,7 @@ import MyComments from "../SongComments/MyComments";
 function SongDisplay() {
   const { id } = useParams();
   const song = useSelector((state) => state.songs[id]);
+  const songs = useSelector((state) => state.songs);
   const playbackTime = useSelector((state) => state.playback.timestamp);
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -70,6 +72,11 @@ function SongDisplay() {
         {userOwnsSong && <SongEditButton song={song} />}
         <MyComments />
       </div>
+      <ul className="displaySongsList">
+        {Object.values(songs).map((song) => {
+          return <SingleSong song={song} key={song.id} />;
+        })}
+      </ul>
     </div>
   );
 }
