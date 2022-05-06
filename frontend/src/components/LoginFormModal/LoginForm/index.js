@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { loginUser } from "../../../store/session";
 import { useDispatch } from "react-redux";
 
-import "./LoginForm.css";
+import "./LoginForm.css"
+
+import DemoLogin from "./DemoLogin";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -50,8 +52,14 @@ function LoginForm() {
             required
           />
         </div>
-        <div class="loginSubmit">
-          <button type="submit">Log In</button>
+        <div className="fish">
+          <button
+            className="loginFormButton"
+            type="submit"
+          >
+              Log In
+          </button>
+          <DemoLogin setErrors={setErrors} />
         </div>
       </form>
     </div>

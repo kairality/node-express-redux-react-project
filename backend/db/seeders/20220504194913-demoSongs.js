@@ -43,6 +43,14 @@ module.exports = {
             "https://s3.us-west-1.amazonaws.com/songswarm.songs/1651697325629.jpg",
           public: true,
         },
+        {
+          userId: 5,
+          title: "10 Mins of Cicadas",
+          src: "https://s3.us-west-1.amazonaws.com/songswarm.songs/1651812016709.mp3",
+          imgSrc:
+            "https://s3.us-west-1.amazonaws.com/songswarm.songs/1651812034887.png",
+          public: true,
+        },
       ],
       {}
     );
@@ -58,6 +66,7 @@ module.exports = {
             "Metal",
             "Return to Oblivion",
             "Flow Together",
+            "10 Mins of Cicadas"
           ],
         },
       },

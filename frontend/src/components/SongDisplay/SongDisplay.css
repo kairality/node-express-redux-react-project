@@ -11,7 +11,7 @@
 
 .songDisplayCover {
     width: 500px;
-    max-height: 500px;
+    height: 500px;
     object-fit: cover;
     grid-area: photo;
     border-radius: 16px;
