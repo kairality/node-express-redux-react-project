@@ -1,7 +1,7 @@
-### songswarm
+# Songswarm
 ## listen to music in the ... swarm?
 
-# Getting started
+### Getting started
 
 1. Clone this repository
 
@@ -26,5 +26,5 @@
 
 But it might be annoying to set up an AWS account just to test this, so why not just check it out on
 
-# Live
+### Live
 https://songswarm.herokuapp.com/
