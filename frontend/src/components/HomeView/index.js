@@ -10,6 +10,8 @@ import "./HomeView.css"
 function HomeView() {
   const sessionUser = useSelector((state) => state.session.user);
   const songs = useSelector((state) => state.songs);
+  const currentSong = useSelector((state) => state.currentSong);
+  console.log(currentSong.id && "hello");
   return (
     <Switch>
       <Route path="/songs" exact>
