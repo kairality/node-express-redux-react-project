@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { makeComment } from '../../../store/songComments';
+import { makeComment } from "../../../store/songComments";
 
-
-function SongAddComment({song}) {
+function SongAddComment({ song }) {
   const sessionUser = useSelector((state) => state.session.user);
   const playbackTimestamp = useSelector((state) => state.playback.timestamp);
   const currentSongId = useSelector((state) => state.currentSong?.id);
@@ -23,35 +22,32 @@ function SongAddComment({song}) {
     e.preventDefault();
     setErrors([]);
     const data = {
-        userId: sessionUser.id,
-        songId: song.id,
-        body,
-        songTimestamp,
-     };
-     if (data && data.errors) {
-         setErrors(data.errors);
-         return;
-     }
-     const comment = await dispatch(makeComment(data));
-     setBody("");
-     setFrozen(false);
+      userId: sessionUser.id,
+      songId: song.id,
+      body,
+      songTimestamp,
+    };
+    if (data && data.errors) {
+      setErrors(data.errors);
+      return;
+    }
+    const comment = await dispatch(makeComment(data));
+    setBody("");
+    setFrozen(false);
   };
 
   useEffect(() => {
-    setDisabled(body.length === 0)
-  },[body])
+    setDisabled(body.length === 0);
+  }, [body]);
 
-
-  useEffect(() =>
-    {
-      if (!frozen) {
-          setSongTimestamp(Math.floor(playbackTimestamp));
-      }
-      if (!isCurrentSong) {
-          setSongTimestamp(0);
-      }
-  },[playbackTimestamp, frozen, isCurrentSong])
-
+  useEffect(() => {
+    if (!frozen) {
+      setSongTimestamp(Math.floor(playbackTimestamp));
+    }
+    if (!isCurrentSong) {
+      setSongTimestamp(0);
+    }
+  }, [playbackTimestamp, frozen, isCurrentSong]);
 
   return (
     <form className="commentAddForm" onSubmit={handleSubmit}>
@@ -65,10 +61,12 @@ function SongAddComment({song}) {
           onFocus={(e) => setFrozen(true)}
           onBlur={(e) => setFrozen(shouldFreeze)}
         />
-        <button disabled={disabled} type="submit">Comment</button>
+        <button disabled={disabled} type="submit">
+          Comment
+        </button>
       </div>
       <label className="ticker" htmlFor="body">
-        Comment at: {songTimestamp} seconds
+        Comment at {songTimestamp} seconds
       </label>
     </form>
   );
