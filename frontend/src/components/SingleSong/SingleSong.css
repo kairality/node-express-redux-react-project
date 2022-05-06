@@ -9,6 +9,12 @@
   gap: 1em;
 }
 
+.songTileDetail h3 {
+  display: flex;
+  padding-top: auto;
+  padding-bottom: auto;
+}
+
 .singleSong:hover {
   background: #eee;
   cursor: pointer;
