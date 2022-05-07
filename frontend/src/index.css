@@ -9,14 +9,17 @@ body {
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
+    margin-bottom: 0px;
     overflow-y: hidden;
 }
+
 
 .wrapper {
     padding-top: 1em;
     padding-left: 1em;
     max-height: 750px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding-bottom: 120px;
 }
 
 h1 {
@@ -25,7 +28,7 @@ h1 {
 }
 
 .crying {
-    display: block;
+    display: none;
     height: 200px;
     margin-top: 20px;
     margin-bottom: 0px;

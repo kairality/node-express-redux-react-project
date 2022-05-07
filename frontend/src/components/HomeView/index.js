@@ -20,18 +20,16 @@ function HomeView() {
           <h1>All Songs</h1>
           <ul className="songsList">
             {Object.values(songs).map((song) => {
-              return <SingleSong song={song} key={song.id} />;
+              return <SingleSong song={song} size="tile" key={song.id} />;
             })}
           </ul>
         </div>
-        <div className="crying" />
       </Route>
       <Route path="/songs/:id">
         <div className="alsoCrying" />
         <div className="wrapper">
           <SongDisplay />
         </div>
-        <div className="crying" />
       </Route>
     </Switch>
   );

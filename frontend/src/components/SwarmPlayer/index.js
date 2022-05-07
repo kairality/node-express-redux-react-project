@@ -37,17 +37,20 @@ function SwarmPlayer() {
   }
 
   return (
-    <div className="swarmPlayer">
-      <AudioPlayer
-        autoPlay
-        onLoadedData={handleLoad}
-        src={currentSong?.src}
-        onPlay={startPlaying}
-        onListen={whileListening}
-        onSeeked={afterSeeking}
-        customAdditionalControls={[<SingleSong song={currentSong} size={"small"} />]}
-      />
-    </div>
+      <footer className="swarmPlayer">
+        <AudioPlayer
+          className="player"
+          autoPlay
+          onLoadedData={handleLoad}
+          src={currentSong?.src}
+          onPlay={startPlaying}
+          onListen={whileListening}
+          onSeeked={afterSeeking}
+          customAdditionalControls={[
+            <SingleSong song={currentSong} size={"small"} />,
+          ]}
+        />
+      </footer>
   );
 }
 

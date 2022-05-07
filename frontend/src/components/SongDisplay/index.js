@@ -77,7 +77,7 @@ function SongDisplay() {
         <MyComments />
       </div>
       <ul className="displaySongsList">
-        {Object.values(songs).map((song) => {
+        {Object.values(songs).slice(0,5).map((song) => {
           return <SingleSong song={song} key={song.id} />;
         })}
       </ul>

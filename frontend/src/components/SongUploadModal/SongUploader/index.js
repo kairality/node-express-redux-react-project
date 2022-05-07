@@ -3,8 +3,10 @@ import { FileUploader } from "react-drag-drop-files";
 import { useSelector } from "react-redux";
 import { uploadSong } from "../../../store/song";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import "./SongUpload.css";
+import { setCurrentSong } from "../../../store/currentSong";
 
 const fileTypes = [
   "WAV",
@@ -23,6 +25,8 @@ function SongUploader({ setShowModal }) {
   const [title, setTitle] = useState("");
   const [privPublic, setPrivPublic] = useState(true);
   const [errors, setErrors] = useState([]);
+
+  const history = useHistory();
 
   const typeArea = (
     <span className="fileTypes">Accepted Types: {fileTypes.join(", ")}</span>
@@ -89,6 +93,8 @@ function SongUploader({ setShowModal }) {
     });
     if (song && errors.length === 0) {
       setShowModal(false);
+      // dispatch(setCurrentSong(song));
+      history.push(`/songs/${song.id}`);
     }
   };
 

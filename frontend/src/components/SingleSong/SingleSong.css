@@ -44,3 +44,68 @@
   align-items: center;
   gap: 1em;
 }
+
+.singleSong.tile {
+  display: grid;
+  grid-template-areas:
+   "photo"
+   "tile"
+   "description";
+  grid-template-columns: 200px;
+  grid-template-rows: 200px 30px 30px;
+  width: 200;
+  height: 270px;
+  overflow: hidden;
+  font-size: small;
+  padding: 0px;
+  border-radius:
+}
+
+.singleSong.tile img {
+  height: 200px;
+  width: 200px;
+  grid-area: photo;
+  border-radius: 8px;
+  box-shadow: 2px 4px 3px rgba(0,0,0,0.4)
+}
+
+.singleSong.tile .songTileDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+.singleSong.tile .songTileDetail p {
+  margin-top: 0px;
+}
+
+.singleSong.tile .songTileDetail h3 {
+  grid-area: title;
+  margin-bottom: 0px;
+}
+
+.singleSong.tile p {
+  grid-area: description;
+}
+
+@keyframes bounce {
+	0%, 100%, 20%, 50%, 80% {
+		transform: translateY(0)
+	}
+	40% {
+		transform: translateY(-10px)
+	}
+	60% {
+		transform: translateY(-5px)
+	}
+}
+
+.singleSong.tile:hover {
+  cursor: pointer;
+   animation: bounce .5s infinite;
+   -webkit-animation: bounce .5s infinite;
+   -moz-animation: bounce .5s infinite;
+   -o-animation: bounce .5s infinite;
+}
