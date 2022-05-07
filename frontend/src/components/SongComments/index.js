@@ -24,9 +24,18 @@ function SongComments({ song }) {
     }
     return playbackTime >= ts && playbackTime <= ts + 15;
   };
-  const filteredComments = Object.values(songComments)
+  let filteredComments = Object.values(songComments)
     .filter((comment) => commentFilter(comment))
     .sort((a, b) => b.songTimestamp - a.songTimestamp);
+  // if (filteredComments.length > 10) {
+  //   const myComments = filteredComments.filter(comment => comment?.userId === sessionUser?.id);
+  //   const newComments = filteredComments.filter(comment => Date(comment.createdAt) >= Date.now() - 1000 * 60 * 60);
+  //   const filtLength = myComments.length + newComments.length;
+  //   const pullComments = filteredComments.slice(0, (12-filtLength));
+  //   filteredComments = [...myComments, ...newComments, ...pullComments].sort(
+  //     (a, b) => b.songTimestamp - a.songTimestamp
+  //   );
+  // }
   return (
     <div className="commentMain">
       <div className="commentAdd">

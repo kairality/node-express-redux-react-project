@@ -56,6 +56,7 @@ function SongDisplay() {
     User: { username },
   } = song;
 
+
   return (
     <div className="songDisplay">
       <div className="cover">

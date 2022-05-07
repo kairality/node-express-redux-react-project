@@ -4,7 +4,7 @@
       "controls"
       "comments";
     grid-template-columns: 1fr;
-    grid-template-rows: 120px 800px;
+    grid-template-rows: 120px 1fr;
 }
 
 .commentsInput {

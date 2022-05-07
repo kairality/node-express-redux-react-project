@@ -30,8 +30,8 @@ body {
 .wrapper {
     padding-top: 1em;
     padding-left: 1em;
+    flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 120px;
 }
 
 h1 {
