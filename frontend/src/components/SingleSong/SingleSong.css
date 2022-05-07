@@ -39,10 +39,8 @@
 }
 
 .singleSong.small {
-  padding: none;
   height: 60px;
   width: 100%;
-  overflow: hidden;
 }
 
 .singleSong.small img {
@@ -51,6 +49,7 @@
 }
 
 .singleSong.small .songTileDetail {
+  min-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
