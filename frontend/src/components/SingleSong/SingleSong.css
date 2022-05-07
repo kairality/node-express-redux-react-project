@@ -2,7 +2,6 @@
 
 .singleSong {
   padding: 10px;
-  overflow: auto;
   display: flex;
   width: 250px;
   justify-content: flex-start;
@@ -16,14 +15,15 @@
 }
 
 .songTileDetail {
-  max-width: 200px;
+  max-width: 250px;
 }
 
 .songTileDetail h3 {
+    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: inherit;
+    width: 100%;
     word-break: normal;
 }
 
