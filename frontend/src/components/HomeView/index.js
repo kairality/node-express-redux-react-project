@@ -24,12 +24,14 @@ function HomeView() {
             })}
           </ul>
         </div>
+        <div className="crying"></div>
       </Route>
       <Route path="/songs/:id">
         <div className="alsoCrying" />
         <div className="wrapper">
           <SongDisplay />
         </div>
+        <div className="crying"></div>
       </Route>
     </Switch>
   );

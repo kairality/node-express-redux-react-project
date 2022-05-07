@@ -4,7 +4,12 @@
     font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans","Garuda","Verdana","Tahoma","sans-serif";
 }
 
+html {
+  height: 100%;
+}
+
 body {
+    height: 100%;
     color: #222222;
     margin-top: 0px;
     margin-left: 0px;
@@ -13,11 +18,18 @@ body {
     overflow-y: hidden;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 
 .wrapper {
     padding-top: 1em;
     padding-left: 1em;
-    max-height: 750px;
     overflow-y: auto;
     padding-bottom: 120px;
 }
@@ -28,13 +40,17 @@ h1 {
 }
 
 .crying {
-    display: none;
-    height: 200px;
-    margin-top: 20px;
+    min-height: 120px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 120px;
     margin-bottom: 0px;
 }
 
 .alsoCrying {
+    min-height: 50px;
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 50px;
 }
 

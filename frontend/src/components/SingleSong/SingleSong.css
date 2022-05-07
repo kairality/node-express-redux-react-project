@@ -11,8 +11,6 @@
 
 .songTileDetail h3 {
   display: flex;
-  padding-top: auto;
-  padding-bottom: auto;
 }
 
 .singleSong:hover {
@@ -58,7 +56,6 @@
   overflow: hidden;
   font-size: small;
   padding: 0px;
-  border-radius:
 }
 
 .singleSong.tile img {
@@ -82,11 +79,13 @@
 }
 
 .singleSong.tile .songTileDetail h3 {
+  text-overflow: ellipsis;
   grid-area: title;
   margin-bottom: 0px;
 }
 
 .singleSong.tile p {
+  display: flex;
   grid-area: description;
 }
 
