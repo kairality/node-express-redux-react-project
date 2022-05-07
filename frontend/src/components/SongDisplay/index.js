@@ -56,6 +56,9 @@ function SongDisplay() {
     User: { username },
   } = song;
 
+  const displaySongs = Object.values(songs).sort((a,b) => b.createdAt - a.createdAt)
+    .slice(0,6);
+
 
   return (
     <div className="songDisplay">
@@ -78,7 +81,7 @@ function SongDisplay() {
         <MyComments />
       </div>
       <ul className="displaySongsList">
-        {Object.values(songs).slice(0,5).map((song) => {
+        {displaySongs.map((song) => {
           return <SingleSong song={song} key={song.id} />;
         })}
       </ul>

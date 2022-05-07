@@ -74,12 +74,10 @@
 
 .songCommentsContainer {
     grid-area: comments;
-    height: 80%;
-    padding-bottom: 50px;
     width: 100%;
     list-style: none;
     overflow-y: auto;
-    margin-bottom: 0px;
+    margin-bottom: 1em;
     display: flex;
     flex-flow: column;
 }

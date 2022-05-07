@@ -4,9 +4,19 @@
   padding: 10px;
   overflow: auto;
   display: flex;
+  width: 250px;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
+      overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: inherit;
+    word-break: normal;
+}
+
+.songTileDetail {
+  max-width: 200px;
 }
 
 .songTileDetail h3 {
