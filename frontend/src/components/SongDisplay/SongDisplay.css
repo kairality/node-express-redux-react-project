@@ -64,6 +64,10 @@
     background-color: red;
 }
 
+.songDeleteBtn:hover {
+    background-color: red;
+}
+
 .cover {
     grid-area: photo;
     position: relative;
