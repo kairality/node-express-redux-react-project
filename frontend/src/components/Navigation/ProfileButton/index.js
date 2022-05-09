@@ -8,6 +8,7 @@ import { genSongs } from "../../../store/song";
 import defaultAvatar from "../../../images/default_album.png";
 
 import "./ProfileButton.css"
+import { setCurrentSong } from "../../../store/currentSong";
 
 function ProfileButton({ user }) {
 
@@ -35,6 +36,7 @@ function ProfileButton({ user }) {
   const handleLogout = async (e) => {
     e.preventDefault();
     await dispatch(logoutUser());
+    await dispatch(setCurrentSong({}));
     await dispatch(genSongs({}));
     history.push("/");
   };
