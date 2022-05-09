@@ -14,8 +14,8 @@ function Welcome() {
   return (
     <>
       {sessionUser && <Redirect to="/songs" />}
-      <figure className="splash">
-       <img src={cicada} />
+      <figure className="splash" style={{backgroundImage: `url(${cicada})`}}>
+       {/* <img src={cicada} /> */}
         <figcaption className="splashCaption">Catch the buzz on the latest music with SongSwarm</figcaption>
         <div className="splashControl">
           <LoginFormModal />
