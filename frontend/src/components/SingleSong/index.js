@@ -25,19 +25,19 @@ function SingleSong({ song, size }) {
   const {title, imgSrc} = song;
   const songUser = song?.User;
   const username = songUser?.username;
+  console.log(song);
 
   return (
     <li
       className={`singleSong ${size ?? ''}`}
       onClick={() => {
-        //dispatch(setCurrentSong(song));
-        history.push(`/songs/${song.id}`);
+          history.push(`/songs/${song.id ?? ""}`);
       }}
     >
       <img className="songTileImg" src={song.imgSrc ?? defaultImg} />
       <div className="songTileDetail">
         <h3>{title ?? "No song playing! Pick one!"}</h3>
-        <p>{username} {song.public ? null : <i class="fa-solid fa-eye-slash"></i>}</p>
+        <p>{username} { (!song?.id || song?.public ) ? null : <i class="fa-solid fa-eye-slash"></i>}</p>
       </div>
     </li>
   );
