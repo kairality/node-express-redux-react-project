@@ -10,7 +10,6 @@ export default function DemoLogin({ setErrors }) {
   // during presentation time.
   useEffect(() => {
     const demoSetting = process.env.REACT_APP_DEMO_LOGIN_ENABLED;
-    console.log(demoSetting);
     if (demoSetting === "false") {
       setDisabled(true);
       setErrors([

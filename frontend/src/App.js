@@ -16,7 +16,6 @@ function App() {
 
     useEffect(() => {
       dispatch(sessionRestoreUser()).then(() => setIsLoaded(true));
-      dispatch(genSongs());
     }, [dispatch]);
 
    const sessionUser = useSelector((state) => state.session.user);

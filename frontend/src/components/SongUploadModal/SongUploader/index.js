@@ -84,7 +84,6 @@ function SongUploader({ setShowModal }) {
     }
 
     const userId = sessionUser.id;
-    console.log(userId, title, privPublic, file);
     const song = await dispatch(
       uploadSong({ userId, title, privPublic, file })
     ).catch(async (res) => {

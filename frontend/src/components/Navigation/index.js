@@ -16,13 +16,13 @@ function Navigation({isLoaded}) {
   let sessionLinks;
   if (!loggedOut) {
     sessionLinks = [
-      <SongUploadModal />,
-      <ProfileButton user={sessionUser} />,
+      <SongUploadModal key="signup" />,
+      <ProfileButton key="profile" user={sessionUser} />,
     ]
   } else {
     sessionLinks = [
-        <LoginFormModal />,
-        <SignupFormModal />
+        <LoginFormModal key="login"/>,
+        <SignupFormModal key="signup"/>
     ];
 
   }
@@ -30,10 +30,10 @@ function Navigation({isLoaded}) {
   return (
     <nav>
       <ul className={loggedOut ? "loggedOutNav" : ""}>
-        <li>
+        <li key="logo">
           <img className="navbarLogo" src={logo} />
         </li>
-        <li>
+        <li key="home">
           <NavLink className="homeButton" exact to="/">
             Home
           </NavLink>

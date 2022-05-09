@@ -5,13 +5,23 @@ import SingleSong from "../SingleSong";
 import SwarmPlayer from "../SwarmPlayer";
 import SongDisplay from "../SongDisplay";
 
+import { genSongs } from "../../store/song";
+
 import "./HomeView.css"
+
+
 
 function HomeView() {
   const sessionUser = useSelector((state) => state.session.user);
+  const userId = useSelector((state) => state.session.user?.id)
   const songs = useSelector((state) => state.songs);
   const currentSong = useSelector((state) => state.currentSong);
-  console.log(currentSong.id && "hello");
+  const dispatch = useDispatch();
+
+     useEffect(() => {
+       dispatch(genSongs(sessionUser));
+     }, [dispatch, sessionUser, userId]);
+
   return (
     <Switch>
       <Route path="/songs" exact>

@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 
 //db imports
-const { User } = require("../../db/models");
+const { User, Song } = require("../../db/models");
 
 //auth imports
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
@@ -37,6 +37,18 @@ const validateSignup = [
     validatePassword,
     handleValidationErrors,
 ];
+
+router.get(
+  "/:id(\\d+)/songs",
+  asyncHandler(async (req, res, next) => {
+    const {id} = req.params;
+    const songs = await Song.findAll({
+      where: { userId: id },
+      include: [{ model: User, attributes: ["username"] }],
+    });
+    return res.json(songs);
+  })
+);
 
 
 

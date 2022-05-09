@@ -10,7 +10,6 @@ import SignupFormModal from "../SignupFormModal";
 function Welcome() {
 
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(sessionUser);
 
   return (
     <>
@@ -18,7 +17,7 @@ function Welcome() {
       <figure className="splash">
        <img src={cicada} />
         <figcaption className="splashCaption">Catch the buzz on the latest music with SongSwarm</figcaption>
-        <div class="splashControl">
+        <div className="splashControl">
           <LoginFormModal />
           <SignupFormModal />
         </div>

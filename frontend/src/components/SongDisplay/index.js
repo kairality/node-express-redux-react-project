@@ -31,6 +31,7 @@ function SongDisplay() {
     }
   }, [currentSongId, song, dispatch]);
 
+
   // load the song's comments from the database
   useEffect(() => {
     dispatch(genComments(song));

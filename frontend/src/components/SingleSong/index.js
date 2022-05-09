@@ -37,7 +37,7 @@ function SingleSong({ song, size }) {
       <img className="songTileImg" src={song.imgSrc ?? defaultImg} />
       <div className="songTileDetail">
         <h3>{title ?? "No song playing! Pick one!"}</h3>
-        <p>{username}</p>
+        <p>{username} {song.public ? null : <i class="fa-solid fa-eye-slash"></i>}</p>
       </div>
     </li>
   );

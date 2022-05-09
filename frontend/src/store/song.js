@@ -31,8 +31,8 @@ const updateSong = (song) => {
   return {
     type: UPDATE_SONG,
     payload: song,
-  }
-}
+  };
+};
 
 export const uploadSong = (data) => async (dispatch) => {
   const { userId, title, privPublic, file } = data;
@@ -57,7 +57,7 @@ export const uploadSong = (data) => async (dispatch) => {
 
 export const editSong = (song, data) => async (dispatch) => {
   const { id } = song;
-  const {title, privPublic, imgFile } = data;
+  const { title, privPublic, imgFile } = data;
   const formData = new FormData();
   formData.append("title", title);
   formData.append("public", privPublic);
@@ -73,20 +73,30 @@ export const editSong = (song, data) => async (dispatch) => {
   });
   const songData = await response.json();
   dispatch(addSong(songData));
-  return {...songData};
-}
+  return { ...songData };
+};
 
 export const deleteSong = (song) => async (dispatch) => {
-    const songId = song.id;
-    const response = await ezFetch(`/api/songs/${songId}`, "DELETE");
-    dispatch(removeSong(song));
-}
+  const songId = song.id;
+  const response = await ezFetch(`/api/songs/${songId}`, "DELETE");
+  dispatch(removeSong(song));
+};
 
-export const genSongs = () => async (dispatch) => {
-  const response = await ezFetch("/api/songs");
-  const songs = await response.json();
-  if (response.ok) {
-    dispatch(loadSongs(songs));
+export const genSongs = (user) => async (dispatch) => {
+  const userId = user?.id;
+  if (!userId) {
+    dispatch(loadSongs([]));
+  }
+  const [publicResponse, mySongsResponse] = await Promise.all([
+    ezFetch("/api/songs"),
+    ezFetch(`/api/users/${userId}/songs`),
+  ]);
+  const [songs, mySongs] = await Promise.all([
+    publicResponse.json(),
+    mySongsResponse.json(),
+  ]);
+  if (publicResponse.ok && mySongsResponse.ok) {
+    dispatch(loadSongs([...songs, ...mySongs]));
   }
   return songs;
 };
@@ -104,7 +114,7 @@ const songReducer = (state = {}, action) => {
       for (let song of action.payload) {
         songData[song.id] = song;
       }
-      return { ...state, ...songData };
+      return { ...songData };
     default:
       return state;
   }

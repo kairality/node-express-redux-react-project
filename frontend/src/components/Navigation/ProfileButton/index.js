@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../store/session";
 import { useHistory } from "react-router-dom";
+import { genSongs } from "../../../store/song";
 
 import defaultAvatar from "../../../images/default_album.png";
 
@@ -34,6 +35,7 @@ function ProfileButton({ user }) {
   const handleLogout = async (e) => {
     e.preventDefault();
     await dispatch(logoutUser());
+    await dispatch(genSongs({}));
     history.push("/");
   };
 

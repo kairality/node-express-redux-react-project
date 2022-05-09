@@ -44,11 +44,13 @@ router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     const songs = await Song.findAll({
+      where: { public: true },
       include: [{ model: User, attributes: ["username"] }],
     });
     return res.json(songs);
   })
 );
+
 
 router.patch(
   "/:id(\\d+)",
@@ -104,7 +106,6 @@ router.post(
   handleValidationErrors,
   asyncHandler(async (req, res, next) => {
     const { userId, title, public } = req.body;
-    console.log(userId, title, public);
     try {
       const src = await singlePublicFileUpload(req.file);
       const song = await Song.create({ userId, title, src, public });

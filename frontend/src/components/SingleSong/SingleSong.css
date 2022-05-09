@@ -122,3 +122,11 @@
    -moz-animation: bounce .5s infinite;
    -o-animation: bounce .5s infinite;
 }
+
+.singleSong p i {
+  color: #666666;
+  margin-left: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
