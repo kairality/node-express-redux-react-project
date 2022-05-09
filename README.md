@@ -1,7 +1,7 @@
 # Songswarm
 ## Listen to music in the ... swarm?
 
-This is a Soundcloud-inspired music player app.  You can upload music, listen to music, and currently, comment on music. More features to come!
+This is a Soundcloud-inspired music player app.  You can upload music, listen to music, and currently, comment on music.  Music and image uploads (for song covers) are handled using the AWS SDK and using React/Redux the music player works no matter where you are in the app! This project was built solo in the course of a week so I decided to limit the feautures to those for now, but as I have time I plan to bring more features to this project such as playlists, likes, visualizations, and discovery views.
 
 ### Getting started
 
