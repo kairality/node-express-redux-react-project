@@ -23,8 +23,10 @@ This is a Soundcloud-inspired music player app.  You can upload music, listen to
 6. Start the app with  the following command
 
    `npm start`
+   
+ 
 
-But it might be annoying to set up an AWS account just to test this, so why not just check it out on
+You will need to run this command in both the frontend and backend. But it might be annoying to set up an AWS account just to test this, so why not just check it out on
 
 ### Live
 https://songswarm.herokuapp.com/
