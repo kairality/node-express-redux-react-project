@@ -25,6 +25,7 @@ function SongUploader({ setShowModal }) {
   const [title, setTitle] = useState("");
   const [privPublic, setPrivPublic] = useState(true);
   const [errors, setErrors] = useState([]);
+  const [disabledUploading, setDisabledUploading] = useState(false);
 
   const history = useHistory();
 
@@ -84,6 +85,7 @@ function SongUploader({ setShowModal }) {
     }
 
     const userId = sessionUser.id;
+    setDisabledUploading(true);
     const song = await dispatch(
       uploadSong({ userId, title, privPublic, file })
     ).catch(async (res) => {
@@ -144,7 +146,9 @@ function SongUploader({ setShowModal }) {
             types={fileTypes}
           />
         </div>
-        <button type="submit">Upload Song</button>
+        <button disabled={disabledUploading} type="submit">
+          {disabledUploading ? "Uploading ..." : "Upload to the Swarm"}
+        </button>
       </form>
       <ul class="uploadErrors">
         {errors.length > 0 &&

@@ -105,6 +105,10 @@
     font-weight: bold;
 }
 
+.songUploadForm button:disabled {
+    background-color: #666666;
+}
+
 .songPrivateCheckbox {
     height: 20px;
     width: 20px;

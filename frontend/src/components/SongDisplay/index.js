@@ -57,7 +57,9 @@ function SongDisplay() {
     User: { username },
   } = song;
 
-  const displaySongs = Object.values(songs).sort((a,b) => b.createdAt - a.createdAt)
+  const displaySongs = Object.values(songs).sort((a,b) => {
+    return (new Date(b.createdAt)) - (new Date(a.createdAt))
+  })
     .slice(0,6);
 
 
